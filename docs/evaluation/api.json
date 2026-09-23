@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-23T15:31:47.204Z",
+  "base": "http://localhost:4322",
+  "total": 9,
+  "results": [
+    {
+      "name": "Question reaches the backend",
+      "status": 200,
+      "passed": true,
+      "durationMs": 58
+    },
+    {
+      "name": "Follow-up context",
+      "status": 200,
+      "passed": true,
+      "durationMs": 7
+    },
+    {
+      "name": "Availability tool",
+      "status": 200,
+      "passed": true,
+      "durationMs": 2
+    },
+    {
+      "name": "Unknown answer",
+      "status": 200,
+      "passed": true,
+      "durationMs": 6
+    },
+    {
+      "name": "Malformed JSON",
+      "status": 400,
+      "passed": true,
+      "durationMs": 3
+    },
+    {
+      "name": "Short question",
+      "status": 400,
+      "passed": true,
+      "durationMs": 2
+    },
+    {
+      "name": "Invalid history",
+      "status": 400,
+      "passed": true,
+      "durationMs": 1
+    },
+    {
+      "name": "Invalid stay",
+      "status": 400,
+      "passed": true,
+      "durationMs": 3
+    },
+    {
+      "name": "Oversized request",
+      "status": 413,
+      "passed": true,
+      "durationMs": 2
+    }
+  ]
+}

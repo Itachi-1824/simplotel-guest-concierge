@@ -1,0 +1,18 @@
+[
+  {"id":"check-in","question":"What time is check-in?","type":"answer","source":"arrival","contains":"3:00 PM"},
+  {"id":"pool","question":"Does the hotel have a swimming pool?","type":"answer","source":"pool","contains":"outdoor"},
+  {"id":"family-room","question":"Which room is suitable for three guests?","type":"answer","source":"terrace","contains":"3 guests"},
+  {"id":"breakfast","question":"Is breakfast included for every room?","type":"answer","source":"breakfast","contains":"€24"},
+  {"id":"missing-knowledge","question":"Do you have a helipad?","type":"fallback"},
+  {"id":"ambiguous","question":"Is it included?","type":"clarification"},
+  {"id":"incorrect-assumption","question":"Is the indoor pool open?","type":"answer","contains":"does not confirm an indoor pool"},
+  {"id":"availability-missing","question":"Check room availability","type":"availability-needed"},
+  {"id":"availability-complete","question":"Check availability","stay":{"checkIn":"2026-10-05","checkOut":"2026-10-07","adults":3},"type":"availability"},
+  {"id":"invalid-dates","question":"Check availability","stay":{"checkIn":"2026-10-07","checkOut":"2026-10-05","adults":2},"type":"availability-needed","contains":"1 and 30"},
+  {"id":"graph-follow-up","question":"And breakfast?","history":[{"role":"user","content":"Tell me about the Terrace Suite"}],"type":"answer","source":"breakfast","contains":"Terrace Suite"},
+  {"id":"parking-not-reservation","question":"Is parking available?","type":"answer","source":"parking","contains":"€28"},
+  {"id":"multi-topic","question":"Tell me about breakfast and parking","type":"answer","source":"breakfast","contains":"€28"},
+  {"id":"policy","question":"What is the cancellation policy?","type":"answer","source":"cancellation","contains":"48 hours"},
+  {"id":"semantic-paraphrase","question":"Where can I take a dip?","type":"answer","source":"pool","localOnly":true},
+  {"id":"unrelated","question":"Who won the football world cup?","type":"fallback"}
+]

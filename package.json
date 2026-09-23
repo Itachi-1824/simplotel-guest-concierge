@@ -1,0 +1,33 @@
+{
+  "name": "simplotel-guest-concierge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "dev:ai": "node scripts/dev-all.mjs",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.mjs",
+    "eval": "node scripts/evaluate.mjs",
+    "embeddings": "node scripts/build-embeddings.mjs",
+    "start": "node scripts/start.mjs",
+    "ai:warmup": "node scripts/python.mjs model_service.warmup",
+    "graph:propose": "node scripts/python.mjs model_service.graph_assist",
+    "test:api": "node scripts/test-api.mjs",
+    "test:python": "node scripts/python.mjs unittest model_service.test_signals"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.6",
+    "@astrojs/react": "^7.0.0",
+    "astro": "^7.3.4",
+    "driver.js": "^1.8.0",
+    "lucide-react": "^0.468.0",
+    "motion": "^12.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

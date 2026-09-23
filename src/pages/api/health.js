@@ -1,0 +1,4 @@
+export const prerender = false;
+export function GET() {
+  return new Response(JSON.stringify({status:'ok',service:'simplotel-guest-concierge',inventory:'demonstration'}),{headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
+}

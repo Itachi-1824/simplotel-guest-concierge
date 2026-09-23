@@ -1,0 +1,17 @@
+{
+  "description": "Reviewed fact relationships. Every node references a fact in hotel.json; edges never create hotel claims.",
+  "edges": [
+    {"from":"classic","to":"breakfast","relation":"meal_policy","evidence":["classic","breakfast"]},
+    {"from":"sea-view","to":"breakfast","relation":"meal_policy","evidence":["sea-view","breakfast"]},
+    {"from":"terrace","to":"breakfast","relation":"meal_policy","evidence":["terrace","breakfast"]},
+    {"from":"horizon","to":"breakfast","relation":"meal_policy","evidence":["horizon","breakfast"]},
+    {"from":"sea-view","to":"accessibility","relation":"accessibility_policy","evidence":["accessibility"]},
+    {"from":"classic","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
+    {"from":"sea-view","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
+    {"from":"terrace","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
+    {"from":"horizon","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
+    {"from":"arrival","to":"cancellation","relation":"reservation_policy","evidence":["arrival","cancellation"]},
+    {"from":"arrival","to":"parking","relation":"arrival_service","evidence":["arrival","parking"]},
+    {"from":"arrival","to":"transport","relation":"arrival_service","evidence":["arrival","transport"]}
+  ]
+}

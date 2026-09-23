@@ -1,0 +1,221 @@
+{
+  "hotel": {
+    "name": "The Cove Hotel",
+    "location": "Amalfi Coast, Italy",
+    "currency": "EUR",
+    "timezone": "Europe/Rome",
+    "description": "A fictional coastal boutique hotel used for this demonstration."
+  },
+  "facts": [
+    {
+      "id": "arrival",
+      "topic": "Stay essentials",
+      "question": "What time is check-in and check-out?",
+      "answer": "Check-in begins at 3:00 PM. Check-out is by 11:00 AM. Early check-in and late check-out are subject to availability and cannot be guaranteed.",
+      "tags": [
+        "check-in",
+        "check-out",
+        "arrival",
+        "departure",
+        "early",
+        "late"
+      ]
+    },
+    {
+      "id": "pool",
+      "topic": "Wellbeing",
+      "question": "Is there a swimming pool?",
+      "answer": "Yes. The outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM. Children under 12 must be accompanied by an adult.",
+      "tags": [
+        "pool",
+        "swimming",
+        "children",
+        "hours"
+      ]
+    },
+    {
+      "id": "breakfast",
+      "topic": "Dining",
+      "question": "Is breakfast included?",
+      "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.",
+      "tags": [
+        "breakfast",
+        "included",
+        "food",
+        "suite",
+        "room"
+      ]
+    },
+    {
+      "id": "cancellation",
+      "topic": "Reservations",
+      "question": "What is the cancellation policy?",
+      "answer": "Flexible reservations may be cancelled without charge until 6:00 PM local time, 48 hours before arrival. After that, the first night is charged. Non-refundable rates cannot be cancelled or changed. Check the rate terms on your confirmation.",
+      "tags": [
+        "cancel",
+        "cancellation",
+        "refund",
+        "policy",
+        "reservation"
+      ]
+    },
+    {
+      "id": "parking",
+      "topic": "Getting here",
+      "question": "Is parking available?",
+      "answer": "Valet parking is available for €28 per night. Spaces are limited, so please request a place before arrival.",
+      "tags": [
+        "parking",
+        "car",
+        "valet"
+      ]
+    },
+    {
+      "id": "wifi",
+      "topic": "Stay essentials",
+      "question": "Is Wi-Fi available?",
+      "answer": "Complimentary Wi-Fi is available throughout the hotel and in all rooms.",
+      "tags": [
+        "wifi",
+        "wi-fi",
+        "internet"
+      ]
+    },
+    {
+      "id": "pets",
+      "topic": "Policies",
+      "question": "Are pets allowed?",
+      "answer": "Dogs up to 15 kg are welcome in selected rooms for €35 per night. Please contact the hotel before booking; assistance animals are welcomed without this fee.",
+      "tags": [
+        "pet",
+        "dog",
+        "animal"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "topic": "Accessibility",
+      "question": "Do you have accessible rooms?",
+      "answer": "Two step-free Sea View Rooms are available on request. Public areas are accessible by lift. Please contact the hotel to confirm the room features you need before booking.",
+      "tags": [
+        "accessible",
+        "accessibility",
+        "wheelchair",
+        "step-free"
+      ]
+    },
+    {
+      "id": "classic",
+      "topic": "Rooms",
+      "question": "Tell me about the Classic Room",
+      "answer": "The Classic Room sleeps up to 2 guests in one queen bed. It is 24 m² and starts at €190 per night. Breakfast is not included in the standard rate.",
+      "tags": [
+        "classic",
+        "room",
+        "two guests",
+        "couple"
+      ]
+    },
+    {
+      "id": "sea-view",
+      "topic": "Rooms",
+      "question": "Tell me about the Sea View Room",
+      "answer": "The Sea View Room sleeps up to 2 guests in one king bed. It is 29 m² with a sea-facing balcony and starts at €265 per night. Breakfast is not included in the standard rate.",
+      "tags": [
+        "sea view",
+        "balcony",
+        "room",
+        "king"
+      ]
+    },
+    {
+      "id": "terrace",
+      "topic": "Rooms",
+      "question": "Which room is suitable for three guests?",
+      "answer": "The Terrace Suite sleeps up to 3 guests with a king bed and sofa bed. It is 42 m², has a private terrace, includes breakfast, and starts at €390 per night.",
+      "tags": [
+        "three guests",
+        "3 guests",
+        "family",
+        "terrace",
+        "suite",
+        "sofa bed"
+      ]
+    },
+    {
+      "id": "horizon",
+      "topic": "Rooms",
+      "question": "Which room is suitable for four guests?",
+      "answer": "The Horizon Suite sleeps up to 4 guests with a king bed and two single beds. It is 56 m², has a panoramic terrace, includes breakfast, and starts at €520 per night.",
+      "tags": [
+        "four guests",
+        "4 guests",
+        "family",
+        "horizon",
+        "suite"
+      ]
+    },
+    {
+      "id": "dining",
+      "topic": "Dining",
+      "question": "Does the hotel have a restaurant?",
+      "answer": "The hotel restaurant, Sera, serves coastal Italian cuisine for dinner from 6:30 PM to 10:00 PM. Reservations are recommended.",
+      "tags": [
+        "restaurant",
+        "dinner",
+        "dining",
+        "food"
+      ]
+    },
+    {
+      "id": "transport",
+      "topic": "Getting here",
+      "question": "Can you arrange airport transfers?",
+      "answer": "Private transfers from Naples International Airport can be arranged through the concierge. Price depends on vehicle and travel date; request a quote before arrival.",
+      "tags": [
+        "airport",
+        "transfer",
+        "transport",
+        "concierge"
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "classic",
+      "name": "Classic Room",
+      "capacity": 2,
+      "basePrice": 190,
+      "inventory": 8,
+      "description": "An intimate retreat with a queen bed and considered details.",
+      "icon": "sun"
+    },
+    {
+      "id": "sea-view",
+      "name": "Sea View Room",
+      "capacity": 2,
+      "basePrice": 265,
+      "inventory": 6,
+      "description": "A private balcony and sweeping sea views.",
+      "icon": "waves"
+    },
+    {
+      "id": "terrace",
+      "name": "Terrace Suite",
+      "capacity": 3,
+      "basePrice": 390,
+      "inventory": 4,
+      "description": "Room to linger, with a private terrace and sofa bed.",
+      "icon": "terrace"
+    },
+    {
+      "id": "horizon",
+      "name": "Horizon Suite",
+      "capacity": 4,
+      "basePrice": 520,
+      "inventory": 2,
+      "description": "A generous suite made for shared coastal escapes.",
+      "icon": "horizon"
+    }
+  ]
+}

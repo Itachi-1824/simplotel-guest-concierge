@@ -1,0 +1,439 @@
+{
+  "date": "2026-09-23T15:16:22.962Z",
+  "mode": "baseline",
+  "clock": "2026-10-01 fixed for repeatable availability",
+  "models": null,
+  "passed": 15,
+  "total": 15,
+  "results": [
+    {
+      "id": "check-in",
+      "passed": true,
+      "durationMs": 2,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "arrival",
+          "topic": "Stay essentials"
+        }
+      ],
+      "answer": "Check-in begins at 3:00 PM. Check-out is by 11:00 AM. Early check-in and late check-out are subject to availability and cannot be guaranteed.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "What time is check-in?",
+          "followUp": false,
+          "entities": [],
+          "topics": [
+            "arrival"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "What time is check-in?",
+            "What time is check-in? arrival"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "arrival",
+            "lexicalScore": 4.633092782624953,
+            "semanticScore": 0.783235934410243,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "pool",
+      "passed": true,
+      "durationMs": 1,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "pool",
+          "topic": "Wellbeing"
+        }
+      ],
+      "answer": "Yes. The outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM. Children under 12 must be accompanied by an adult.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "Does the hotel have a swimming pool?",
+          "followUp": false,
+          "entities": [],
+          "topics": [
+            "pool"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "Does the hotel have a swimming pool?",
+            "Does the hotel have a swimming pool? pool"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "pool",
+            "lexicalScore": 4.352074008667792,
+            "semanticScore": 0.8870655251454875,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "family-room",
+      "passed": true,
+      "durationMs": 1,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "breakfast",
+          "topic": "Dining"
+        },
+        {
+          "id": "terrace",
+          "topic": "Rooms"
+        }
+      ],
+      "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.\n\nThe Terrace Suite sleeps up to 3 guests with a king bed and sofa bed. It is 42 m², has a private terrace, includes breakfast, and starts at €390 per night.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "Which room is suitable for three guests?",
+          "followUp": false,
+          "entities": [],
+          "topics": [],
+          "needsClarification": false,
+          "candidates": [
+            "Which room is suitable for three guests?"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "breakfast",
+            "lexicalScore": 0.8789986362950084,
+            "semanticScore": 0.13699915608779778,
+            "rerankScore": 0,
+            "graph": {
+              "from": "horizon",
+              "relation": "meal_policy"
+            }
+          },
+          {
+            "id": "terrace",
+            "lexicalScore": 8.61505189685115,
+            "semanticScore": 0.8153742483272114,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "breakfast",
+      "passed": true,
+      "durationMs": 0,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "breakfast",
+          "topic": "Dining"
+        }
+      ],
+      "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "Is breakfast included for every room?",
+          "followUp": false,
+          "entities": [],
+          "topics": [
+            "breakfast"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "Is breakfast included for every room?",
+            "Is breakfast included for every room? breakfast"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "breakfast",
+            "lexicalScore": 4.317676761720474,
+            "semanticScore": 0.8483757897365094,
+            "rerankScore": 0,
+            "graph": {
+              "from": "classic",
+              "relation": "meal_policy"
+            }
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "missing-knowledge",
+      "passed": true,
+      "durationMs": 0,
+      "type": "fallback",
+      "sources": [],
+      "answer": "I don’t have a reliable answer to that in the hotel information. Please ask the front desk for confirmation."
+    },
+    {
+      "id": "ambiguous",
+      "passed": true,
+      "durationMs": 0,
+      "type": "clarification",
+      "sources": [],
+      "answer": "Which room or service would you like to know about? For example, breakfast, parking, or the Terrace Suite."
+    },
+    {
+      "id": "incorrect-assumption",
+      "passed": true,
+      "durationMs": 0,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "pool",
+          "topic": "Wellbeing"
+        }
+      ],
+      "answer": "The hotel guide describes an outdoor sea-view pool, open from 7:00 AM to 8:00 PM. It does not confirm an indoor pool. Please ask the hotel before relying on that feature."
+    },
+    {
+      "id": "availability-missing",
+      "passed": true,
+      "durationMs": 0,
+      "type": "availability-needed",
+      "sources": [],
+      "answer": "I can check that for you. Choose your dates and number of guests in the stay planner."
+    },
+    {
+      "id": "availability-complete",
+      "passed": true,
+      "durationMs": 1,
+      "type": "availability",
+      "sources": [],
+      "answer": "I found 2 room types for your stay. These are sample availability results, not a live booking guarantee."
+    },
+    {
+      "id": "invalid-dates",
+      "passed": true,
+      "durationMs": 0,
+      "type": "availability-needed",
+      "sources": [],
+      "answer": "Choose a stay between 1 and 30 nights."
+    },
+    {
+      "id": "graph-follow-up",
+      "passed": true,
+      "durationMs": 0,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "breakfast",
+          "topic": "Dining"
+        },
+        {
+          "id": "terrace",
+          "topic": "Rooms"
+        }
+      ],
+      "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.\n\nThe Terrace Suite sleeps up to 3 guests with a king bed and sofa bed. It is 42 m², has a private terrace, includes breakfast, and starts at €390 per night.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "And breakfast? Terrace Suite",
+          "followUp": true,
+          "entities": [
+            "terrace"
+          ],
+          "topics": [
+            "breakfast"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "And breakfast?",
+            "And breakfast? Terrace Suite",
+            "And breakfast? Terrace Suite breakfast"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "breakfast",
+            "lexicalScore": 5.427517529390341,
+            "semanticScore": 0.6027962867863103,
+            "rerankScore": 0,
+            "graph": {
+              "from": "terrace",
+              "relation": "meal_policy"
+            }
+          },
+          {
+            "id": "terrace",
+            "lexicalScore": 4.929100604225156,
+            "semanticScore": 0.32120803721981056,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "parking-not-reservation",
+      "passed": true,
+      "durationMs": 1,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "parking",
+          "topic": "Getting here"
+        }
+      ],
+      "answer": "Valet parking is available for €28 per night. Spaces are limited, so please request a place before arrival.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "Is parking available?",
+          "followUp": false,
+          "entities": [],
+          "topics": [
+            "parking"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "Is parking available?",
+            "Is parking available? parking"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "parking",
+            "lexicalScore": 6.1143459745343245,
+            "semanticScore": 0.8451542547285167,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "multi-topic",
+      "passed": true,
+      "durationMs": 0,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "breakfast",
+          "topic": "Dining"
+        },
+        {
+          "id": "parking",
+          "topic": "Getting here"
+        }
+      ],
+      "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.\n\nValet parking is available for €28 per night. Spaces are limited, so please request a place before arrival.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "Tell me about breakfast and parking",
+          "followUp": false,
+          "entities": [],
+          "topics": [
+            "breakfast",
+            "parking"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "Tell me about breakfast and parking",
+            "Tell me about breakfast and parking breakfast",
+            "Tell me about breakfast and parking parking"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "breakfast",
+            "lexicalScore": 1.761658937862747,
+            "semanticScore": 0.6238502938920436,
+            "rerankScore": 0,
+            "graph": {
+              "from": "classic",
+              "relation": "meal_policy"
+            }
+          },
+          {
+            "id": "parking",
+            "lexicalScore": 4.099152659332466,
+            "semanticScore": 0.5303300858899107,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "policy",
+      "passed": true,
+      "durationMs": 0,
+      "type": "answer",
+      "sources": [
+        {
+          "id": "cancellation",
+          "topic": "Reservations"
+        }
+      ],
+      "answer": "Flexible reservations may be cancelled without charge until 6:00 PM local time, 48 hours before arrival. After that, the first night is charged. Non-refundable rates cannot be cancelled or changed. Check the rate terms on your confirmation.",
+      "trace": {
+        "mode": "grounded-extractive",
+        "queryPlan": {
+          "query": "What is the cancellation policy?",
+          "followUp": false,
+          "entities": [],
+          "topics": [
+            "cancellation"
+          ],
+          "needsClarification": false,
+          "candidates": [
+            "What is the cancellation policy?",
+            "What is the cancellation policy? cancellation"
+          ]
+        },
+        "localModels": null,
+        "selectedQuery": null,
+        "evidence": [
+          {
+            "id": "cancellation",
+            "lexicalScore": 7.063238748050809,
+            "semanticScore": 0.8764598212022147,
+            "rerankScore": 0
+          }
+        ],
+        "layaJudgments": []
+      }
+    },
+    {
+      "id": "unrelated",
+      "passed": true,
+      "durationMs": 0,
+      "type": "fallback",
+      "sources": [],
+      "answer": "I don’t have a reliable answer to that in the hotel information. Please ask the front desk for confirmation."
+    }
+  ]
+}
