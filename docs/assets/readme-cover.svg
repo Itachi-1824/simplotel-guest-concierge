@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-labelledby="title desc">
+  <title id="title">Simplotel Guest Concierge</title>
+  <desc id="desc">Grounded hotel answers. A considered stay. Ask, plan, and review.</desc>
+  <defs><linearGradient id="paper" x2="1" y2="1"><stop stop-color="#f7f3e9"/><stop offset="1" stop-color="#e7eddf"/></linearGradient></defs>
+  <rect width="1280" height="400" rx="18" fill="url(#paper)"/>
+  <path d="M902 400V200a150 150 0 0 1 300 0v200M920 400V200a132 132 0 0 1 264 0v200" fill="none" stroke="#c5cdb9" stroke-width="1"/>
+  <path d="M54 345h1172" stroke="#d3d4c1"/>
+  <text x="64" y="65" fill="#947d53" font-family="Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="4">SIMPLOTEL · GUEST EXPERIENCE</text>
+  <text x="59" y="151" fill="#234d42" font-family="Georgia,serif" font-size="68">Every stay starts</text>
+  <text x="61" y="222" fill="#234d42" font-family="Georgia,serif" font-size="68" font-style="italic">with a question.</text>
+  <text x="64" y="278" fill="#607761" font-family="Arial,sans-serif" font-size="18">Grounded answers. Thoughtful planning. You make the final call.</text>
+  <g transform="translate(968 133)" fill="none" stroke="#9b8259" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h23v18H7l-7 6zM5 6h13M5 11h9"/><path d="M66 2h24v23H66zM66 8h24M72-3v9M84-3v9M71 14h4M81 14h4M71 20h4"/><circle cx="139" cy="12" r="16"/><path d="m132 12 5 5 9-10"/></g>
+  <text x="1050" y="210" fill="#234d42" font-family="Georgia,serif" font-size="28" text-anchor="middle">Ask. Plan. Review.</text>
+  <text x="1050" y="244" fill="#738269" font-family="Arial,sans-serif" font-size="11" letter-spacing="2" text-anchor="middle">YOUR STAY, CONSIDERED</text>
+  <text x="64" y="376" fill="#64775d" font-family="Arial,sans-serif" font-size="12" letter-spacing="1">ASTRO + REACT</text>
+  <text x="259" y="376" fill="#64775d" font-family="Arial,sans-serif" font-size="12" letter-spacing="1">LOCAL CLASSIFICATION + RAG</text>
+  <text x="638" y="376" fill="#64775d" font-family="Arial,sans-serif" font-size="12" letter-spacing="1">DETERMINISTIC STAY TOOLS</text>
+  <text x="1216" y="376" fill="#947d53" font-family="Arial,sans-serif" font-size="11" text-anchor="end">INDEPENDENT ASSESSMENT</text>
+</svg>

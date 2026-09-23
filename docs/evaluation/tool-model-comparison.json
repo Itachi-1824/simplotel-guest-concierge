@@ -1,0 +1,14 @@
+{
+  "scenario": "Final review after corrections, policy questions and preserved booking context",
+  "method": "One real native tool-call request per model, run concurrently through Pollinations, temperature 0, max_tokens 24000, random integer seed. No retries in this comparison.",
+  "results": [
+    {"model":"cohere/command-a-plus","durationMs":7165,"passed":false,"error":"Expected one hotel tool call"},
+    {"model":"mistralai/mistral-large-3","status":200,"durationMs":4627,"tool":"prepare_stay","passed":true},
+    {"model":"openai/gpt-5-nano","status":200,"durationMs":9760,"tool":"prepare_stay","passed":true},
+    {"model":"z-ai/glm-5.3-flash","status":200,"durationMs":6900,"tool":"prepare_stay","passed":true},
+    {"model":"openai/gpt-5.4-nano","status":200,"durationMs":4679,"tool":"prepare_stay","passed":true}
+  ],
+  "checks": ["Exactly one allowed tool call", "Preserved 5–7 October 2026", "Two guests", "EUR 300 nightly limit", "Any view", "Breakfast not required"],
+  "selected": "z-ai/glm-5.3-flash",
+  "limitation": "Selected after a successful compatibility check and user preference. GLM was not the fastest in this sample. One request per model is not an accuracy or latency benchmark."
+}

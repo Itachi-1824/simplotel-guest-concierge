@@ -1,17 +1,252 @@
 {
   "description": "Reviewed fact relationships. Every node references a fact in hotel.json; edges never create hotel claims.",
   "edges": [
-    {"from":"classic","to":"breakfast","relation":"meal_policy","evidence":["classic","breakfast"]},
-    {"from":"sea-view","to":"breakfast","relation":"meal_policy","evidence":["sea-view","breakfast"]},
-    {"from":"terrace","to":"breakfast","relation":"meal_policy","evidence":["terrace","breakfast"]},
-    {"from":"horizon","to":"breakfast","relation":"meal_policy","evidence":["horizon","breakfast"]},
-    {"from":"sea-view","to":"accessibility","relation":"accessibility_policy","evidence":["accessibility"]},
-    {"from":"classic","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
-    {"from":"sea-view","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
-    {"from":"terrace","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
-    {"from":"horizon","to":"wifi","relation":"shared_amenity","evidence":["wifi"]},
-    {"from":"arrival","to":"cancellation","relation":"reservation_policy","evidence":["arrival","cancellation"]},
-    {"from":"arrival","to":"parking","relation":"arrival_service","evidence":["arrival","parking"]},
-    {"from":"arrival","to":"transport","relation":"arrival_service","evidence":["arrival","transport"]}
+    {
+      "from": "classic",
+      "to": "breakfast",
+      "relation": "meal_policy",
+      "evidence": [
+        "classic",
+        "breakfast"
+      ]
+    },
+    {
+      "from": "sea-view",
+      "to": "breakfast",
+      "relation": "meal_policy",
+      "evidence": [
+        "sea-view",
+        "breakfast"
+      ]
+    },
+    {
+      "from": "terrace",
+      "to": "breakfast",
+      "relation": "meal_policy",
+      "evidence": [
+        "terrace",
+        "breakfast"
+      ]
+    },
+    {
+      "from": "horizon",
+      "to": "breakfast",
+      "relation": "meal_policy",
+      "evidence": [
+        "horizon",
+        "breakfast"
+      ]
+    },
+    {
+      "from": "sea-view",
+      "to": "accessibility",
+      "relation": "accessibility_policy",
+      "evidence": [
+        "accessibility"
+      ]
+    },
+    {
+      "from": "classic",
+      "to": "wifi",
+      "relation": "shared_amenity",
+      "evidence": [
+        "wifi"
+      ]
+    },
+    {
+      "from": "sea-view",
+      "to": "wifi",
+      "relation": "shared_amenity",
+      "evidence": [
+        "wifi"
+      ]
+    },
+    {
+      "from": "terrace",
+      "to": "wifi",
+      "relation": "shared_amenity",
+      "evidence": [
+        "wifi"
+      ]
+    },
+    {
+      "from": "horizon",
+      "to": "wifi",
+      "relation": "shared_amenity",
+      "evidence": [
+        "wifi"
+      ]
+    },
+    {
+      "from": "arrival",
+      "to": "cancellation",
+      "relation": "reservation_policy",
+      "evidence": [
+        "arrival",
+        "cancellation"
+      ]
+    },
+    {
+      "from": "arrival",
+      "to": "parking",
+      "relation": "arrival_service",
+      "evidence": [
+        "arrival",
+        "parking"
+      ]
+    },
+    {
+      "from": "arrival",
+      "to": "transport",
+      "relation": "arrival_service",
+      "evidence": [
+        "arrival",
+        "transport"
+      ]
+    },
+    {
+      "from": "breakfast",
+      "to": "breakfast-hours",
+      "relation": "service_schedule",
+      "evidence": [
+        "breakfast",
+        "breakfast-hours"
+      ]
+    },
+    {
+      "from": "breakfast",
+      "to": "dietary",
+      "relation": "dietary_conditions",
+      "evidence": [
+        "breakfast",
+        "dietary"
+      ]
+    },
+    {
+      "from": "dining",
+      "to": "dietary",
+      "relation": "dietary_conditions",
+      "evidence": [
+        "dining",
+        "dietary"
+      ]
+    },
+    {
+      "from": "dining",
+      "to": "children-dining",
+      "relation": "family_dining",
+      "evidence": [
+        "dining",
+        "children-dining"
+      ]
+    },
+    {
+      "from": "arrival",
+      "to": "luggage",
+      "relation": "arrival_service",
+      "evidence": [
+        "arrival",
+        "luggage"
+      ]
+    },
+    {
+      "from": "arrival",
+      "to": "late-arrival",
+      "relation": "late_arrival_conditions",
+      "evidence": [
+        "arrival",
+        "late-arrival"
+      ]
+    },
+    {
+      "from": "late-arrival",
+      "to": "reception",
+      "relation": "overnight_service",
+      "evidence": [
+        "late-arrival",
+        "reception"
+      ]
+    },
+    {
+      "from": "pool",
+      "to": "pool-weather",
+      "relation": "operating_conditions",
+      "evidence": [
+        "pool",
+        "pool-weather"
+      ]
+    },
+    {
+      "from": "pool",
+      "to": "pool-towels",
+      "relation": "shared_amenity",
+      "evidence": [
+        "pool",
+        "pool-towels"
+      ]
+    },
+    {
+      "from": "parking",
+      "to": "charging",
+      "relation": "separate_service_charge",
+      "evidence": [
+        "parking",
+        "charging"
+      ]
+    },
+    {
+      "from": "terrace",
+      "to": "extra-bed",
+      "relation": "occupancy_constraints",
+      "evidence": [
+        "terrace",
+        "extra-bed"
+      ]
+    },
+    {
+      "from": "horizon",
+      "to": "cot",
+      "relation": "request_only_equipment",
+      "evidence": [
+        "horizon",
+        "cot"
+      ]
+    },
+    {
+      "from": "sea-view",
+      "to": "room-requests",
+      "relation": "allocation_conditions",
+      "evidence": [
+        "sea-view",
+        "room-requests"
+      ]
+    },
+    {
+      "from": "contact",
+      "to": "location",
+      "relation": "contact_and_arrival",
+      "evidence": [
+        "contact",
+        "location"
+      ]
+    },
+    {
+      "from": "reception",
+      "to": "contact",
+      "relation": "contact_and_arrival",
+      "evidence": [
+        "reception",
+        "contact"
+      ]
+    },
+    {
+      "from": "transport",
+      "to": "location",
+      "relation": "contact_and_arrival",
+      "evidence": [
+        "transport",
+        "location"
+      ]
+    }
   ]
 }

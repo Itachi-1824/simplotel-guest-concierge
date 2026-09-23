@@ -1,6 +1,7 @@
 {
   "name": "simplotel-guest-concierge",
   "version": "1.0.0",
+  "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "type": "module",
   "scripts": {
@@ -21,6 +22,7 @@
     "@astrojs/node": "^11.1.6",
     "@astrojs/react": "^7.0.0",
     "astro": "^7.3.4",
+    "chrono-node": "^2.10.1",
     "driver.js": "^1.8.0",
     "lucide-react": "^0.468.0",
     "motion": "^12.0.0",
@@ -28,6 +30,6 @@
     "react-dom": "^19.0.0"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.19.0"
   }
 }

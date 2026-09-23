@@ -13,7 +13,7 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Loading state | Thinking indicator, disabled composer, stop control |
 | API/AI failure state | Error message and retry; provider fallback |
 | Follow-up questions | Per-session messages sent as bounded history |
-| Dates and guest collection | Responsive stay planner, date inputs, guest stepper |
+| Dates and guest collection | Natural-language chat collection, automatic form filling, optional date inputs/guest stepper |
 | Clear availability results | Room cards, totals, capacity, inventory label, empty state |
 | Mobile and desktop | Responsive viewport layout and internal message scrolling |
 | Call backend | Same-origin `POST /api/chat` |
@@ -26,7 +26,7 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Question/context API | `src/pages/api/chat.js` |
 | Small hotel knowledge base | `data/hotel.json` |
 | Property, room, amenity, policy and FAQ answers | Source retrieval in `src/lib/assistant.mjs` |
-| Detect availability | Deterministic intent routing plus bounded classifier hint |
+| Detect availability | LLM chooses a typed hotel tool; local parsing and bounded Laya signals provide fallback |
 | Mock availability tool | `checkAvailability(stay)` with validated dates and adults |
 | Appropriate AI use | MiniLM, FlashRank, Laya, optional compatible LLM |
 | Deterministic business logic outside LLM | Validation, capacity, occupancy and totals in code |
@@ -34,7 +34,7 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Conversation context | `query-plan.mjs`: follow-up entities, topics, stay slots |
 | Structured responses | Response types documented in `api.md` |
 | Validation, errors and logging | Body/history limits, HTTP errors, type and duration logs |
-| Meaningful automated tests | 27 Node tests, three Python signal tests, nine HTTP scenarios |
+| Meaningful automated tests | 112 Node tests, three Python signal tests, 15 general and 13 booking HTTP scenarios |
 
 ## Integration and evaluation
 
@@ -71,4 +71,4 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Usefulness measures and production improvements | `docs/architecture.md` |
 | Evaluation scenarios and observed results | `docs/evaluation.md`, `docs/evaluation/*.json` |
 | AI development tool disclosure | README and `docs/credits.md` |
-| Deployment or recording | Optional; local run is the submission path |
+| Deployment or recording | Public HTTPS demo plus documented local setup |

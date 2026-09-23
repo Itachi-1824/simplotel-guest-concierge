@@ -8,7 +8,7 @@ from functools import lru_cache
 from pathlib import Path
 from threading import Lock
 from contextlib import asynccontextmanager
-from .signals import relevance_signal
+from .signals import relevance_signal, booking_state
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = Path(os.getenv("MODEL_CACHE_DIR", str(ROOT / ".cache")))
@@ -22,6 +22,7 @@ from pydantic import BaseModel, Field
 FACTS = json.loads((ROOT / "data" / "hotel.json").read_text(encoding="utf-8"))["facts"]
 EMBEDDING_MODEL = os.getenv("LOCAL_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 RERANK_MODEL = "ms-marco-TinyBERT-L-2-v2"
+LAYA_ROLE = "Local classifier, not an LLM"
 @asynccontextmanager
 async def lifespan(app):
     try:
@@ -140,7 +141,23 @@ def _analyze(question: str, candidates: tuple[str, ...]):
 
 @app.get("/health")
 def health():
-    return {"status":"ok","embedding_loaded":_embedder is not None,"reranker_loaded":_ranker is not None,"laya_loaded":_laya is not None,"degraded_components":list(_errors)}
+    return {"status":"ok","embedding_loaded":_embedder is not None,"reranker_loaded":_ranker is not None,"laya_loaded":_laya is not None,"laya_role":LAYA_ROLE,"fact_count":len(FACTS),"degraded_components":list(_errors)}
+
+
+@lru_cache(maxsize=128)
+def _booking_intent(question: str):
+    _load_laya()
+    with _inference_lock:
+        choices = _choice(booking_state(question), {
+            "view":{"type":"choice","instructions":"Classify the explicitly requested room outlook. If messages disagree, use the last request. Do not infer a preference from a date or unrelated phrase.","criteria":{"sea":"Guest wants to see the sea or ocean from their room","terrace":"Guest wants a private outdoor terrace","unspecified":"No explicit outlook preference, or any view is acceptable"}},
+            "breakfast":{"type":"choice","instructions":"Does the guest explicitly require breakfast to be included in the room rate? Use the last preference if messages disagree.","criteria":{"included":"Breakfast must be included in the room rate","unspecified":"No requirement for included breakfast, or breakfast is unwanted"}}
+        })
+    return {**choices,"classifier":"convaiinnovations/laya" if _laya else None,"role":LAYA_ROLE}
+
+
+@app.post("/v1/booking-intent")
+def booking_intent(request: AnalysisRequest):
+    return _booking_intent(request.question)
 
 
 @app.post("/v1/analyze")

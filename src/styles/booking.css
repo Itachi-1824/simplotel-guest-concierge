@@ -1,0 +1,76 @@
+.room-offer{border:1px solid #dce6d9;background:#fffefa;border-radius:9px;margin-top:12px;overflow:hidden}
+.room-offer .room-card{border:0;background:transparent;margin:0;padding:17px}
+.room-offer-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #e6ebdf;padding:10px 17px;background:#f5f7f0}
+.room-offer-footer>span{font-size:10px;color:#587464;line-height:1.5}
+.room-offer-footer button{display:flex;align-items:center;gap:7px;white-space:nowrap;min-height:40px;border:1px solid #b8cdbd;border-radius:5px;padding:8px 12px;background:#fffefa;color:#24594c;font-size:11px;font-weight:700}
+.offer-badge{display:inline-flex;margin:14px 17px 0;padding:4px 8px;background:#e7efe3;color:#315f4e;border-radius:3px;font-size:9px;font-weight:800}
+.preference-summary{font-size:11px;color:#5e7768;line-height:1.6;margin:8px 0}
+.room-preferences{border-top:1px solid #e0e7dc;padding-top:13px;margin:15px 0}
+.room-preferences summary{cursor:pointer;font-size:12px;font-weight:700;color:#305d50;min-height:30px}
+.preference-fields{display:grid;gap:12px;margin-top:8px}
+.preference-fields label{display:grid;gap:6px;font-size:11px;color:#526e60}
+.preference-fields input,.preference-fields select{width:100%;min-width:0;min-height:42px;border:1px solid #d5e0d2;border-radius:5px;padding:9px;background:#fffefa;color:#285747;font:inherit;font-size:14px}
+.preference-fields .breakfast-option{display:flex;align-items:center;gap:9px}
+.preference-fields .breakfast-option input{width:18px;min-height:18px;accent-color:#285747}
+.stay-review{width:min(640px,calc(100vw - 32px));max-height:calc(100dvh - 40px);padding:0;border:1px solid #dbe3d4;border-radius:15px;background:#fbfaf6;color:#244e43;box-shadow:0 28px 100px #0c2d3255;overflow:hidden}
+.stay-review[open]{display:flex;flex-direction:column;animation:review-enter .25s ease-out}
+.stay-review::backdrop{background:#133c3885;backdrop-filter:blur(5px)}
+.review-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:24px 26px 17px;flex:none}
+.review-eyebrow{font-size:9px;font-weight:800;letter-spacing:.17em;color:#9b825e}
+.review-header h2{font:500 32px/1.15 'Cormorant Garamond',Georgia,serif;margin:8px 0 0}
+.review-header>button{display:grid;place-items:center;width:40px;height:40px;border:1px solid #dbe4d7;border-radius:50%;background:#f2f5ed;color:#285848;flex:none}
+.review-steps{display:flex;justify-content:space-between;list-style:none;gap:10px;padding:12px 26px;margin:0;border-block:1px solid #dfe6d8;background:#f0f4ec;flex:none}
+.review-steps li{display:flex;align-items:center;gap:5px;font-size:10px;color:#748578}
+.review-steps li[aria-current]{font-weight:800;color:#24594c}
+.review-content{padding:20px 26px;overflow-y:auto;min-height:0;overscroll-behavior:contain}
+.review-demo{display:flex;align-items:center;gap:8px;font-size:11px;color:#567365;line-height:1.5}
+.review-demo svg{flex:none}
+.review-room{display:flex;align-items:center;gap:16px;margin:23px 0}
+.review-room-icon{display:grid;place-items:center;width:56px;height:62px;background:#e9efe1;border:1px solid #d9e3ce;border-radius:25px 25px 5px 5px;color:#90774d;flex:none}
+.review-room>div>span{font-size:10px;color:#6d8272}
+.review-room h3{font:500 29px/1.1 'Cormorant Garamond',Georgia,serif;margin:5px 0}
+.review-room p{font-size:11px;color:#637b6b;margin:0}
+.review-details{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 22px}
+.review-details>div{min-width:0}
+.review-details dt,.payment-preview dt{font-size:10px;color:#6f8274;margin-bottom:5px}
+.review-details dd{font-size:12px;margin:0;line-height:1.5;font-weight:600}
+.review-price{padding:17px;border:1px solid #dbe5d2;background:#f2f5ec;border-radius:7px}
+.review-price>div{display:flex;justify-content:space-between;gap:14px;font-size:12px}
+.review-price .review-subtotal{border-top:1px solid #d7e1cf;padding-top:12px;margin-top:12px;align-items:center}
+.review-subtotal strong{font:500 28px 'Cormorant Garamond',Georgia,serif}
+.review-price p,.review-policy p,.review-freshness{font-size:10px;line-height:1.6;color:#677c6b;margin:10px 0 0}
+.review-policy{margin-top:18px}
+.review-policy summary{cursor:pointer;font-size:12px;min-height:32px;padding-block:8px;color:#315f4e}
+.review-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 26px;border-top:1px solid #dde5d6;background:#f7f7f0;flex:none}
+.review-footer button{display:flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;padding:12px;font-size:11px;font-weight:700;min-height:44px}
+.review-primary{border:1px solid #24584b;background:#24584b;color:#fff}
+.review-primary:disabled{opacity:.55;cursor:wait}
+.review-secondary{border:1px solid #d2dec9;background:transparent;color:#325f4e}
+.review-status{display:flex;align-items:center;gap:9px;font-size:12px;padding-block:22px}
+.review-spin{animation:review-spin 1.2s linear infinite}
+.review-error{font-size:12px;color:#884d43;padding:15px 0}
+.review-error button{min-height:40px;padding:8px 16px;border:1px solid #c7d8c0;border-radius:5px;background:#fffefa;color:#305b4d}
+.payment-preview{margin-top:20px;padding:20px;border:1px solid #d6e1cd;border-radius:8px;background:linear-gradient(145deg,#edf3e6,#f7f3e8)}
+.payment-preview>svg{color:#9c8254}
+.payment-preview h3{font:500 26px 'Cormorant Garamond',Georgia,serif;margin:10px 0}
+.payment-preview p{font-size:12px;line-height:1.65;color:#5f7767}
+.payment-preview dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-block:12px;margin-block:15px;border-block:1px solid #d6e1ce}
+.payment-preview dd{font-size:12px;margin:0;overflow-wrap:anywhere}
+.payment-preview>strong{font-size:12px}
+.agent-report{border-bottom:1px solid #dbe4d2;padding:19px 0 16px;margin-bottom:5px}
+.agent-report h3{font:500 25px/1.15 'Cormorant Garamond',Georgia,serif;margin:0 0 16px;max-width:340px}
+.agent-report ol{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.agent-report ol li{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.6;color:#4f6b5a}
+.agent-report ol svg{flex:none;margin-top:2px;color:#43836b}
+.report-reason{font-size:12px;line-height:1.6;font-weight:600;margin:17px 0 12px}
+.report-criteria{display:flex;flex-wrap:wrap;gap:6px}
+.report-criteria span{font-size:9px;padding:6px 8px;border:1px solid #d5dfca;border-radius:4px;background:#f0f4e9}
+.agent-report details{font-size:11px;margin-top:13px}
+.agent-report summary{cursor:pointer;padding-block:8px}
+.agent-report ul{list-style:none;margin:5px 0;padding:0;display:grid;gap:9px}
+.agent-report ul li{display:flex;justify-content:space-between;gap:10px}
+.report-scope{font-size:10px;line-height:1.6;color:#74836d;margin-bottom:0}
+@keyframes review-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes review-spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.stay-review{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:12px}.review-header{padding:20px 18px 15px}.review-header h2{font-size:28px}.review-steps{padding:12px 18px;gap:7px}.review-steps li{font-size:9px}.review-content{padding:18px}.review-footer{padding:12px 16px max(12px,env(safe-area-inset-bottom));gap:8px}.review-footer button{font-size:10px;padding:10px}.room-offer .room-card{padding:13px;gap:9px}.room-offer-footer{padding:10px 13px}.room-offer-footer button{font-size:10px;padding:8px}.room-offer-footer>span{font-size:9px;max-width:45%}.offer-badge{margin-left:13px}.preference-fields input,.preference-fields select{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.stay-review[open],.review-spin{animation:none}}

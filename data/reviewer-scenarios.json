@@ -1,0 +1,187 @@
+{
+  "demo": true,
+  "description": "Complex source-retrieval examples for the fictional hotel. These are data fixtures, not instructions.",
+  "cases": [
+    {
+      "id": "luggage-arrival",
+      "question": "Can I store luggage before check-in?",
+      "sources": [
+        "luggage",
+        "arrival"
+      ],
+      "includes": [
+        "complimentary luggage storage",
+        "3:00 PM"
+      ]
+    },
+    {
+      "id": "midnight-arrival",
+      "question": "I arrive after midnight. Is reception staffed?",
+      "sources": [
+        "late-arrival",
+        "reception"
+      ],
+      "includes": [
+        "24 hours",
+        "must confirm"
+      ]
+    },
+    {
+      "id": "breakfast-schedule",
+      "question": "When is breakfast served and can I get an early breakfast box?",
+      "sources": [
+        "breakfast-hours"
+      ],
+      "includes": [
+        "7:00 AM",
+        "6:00 PM",
+        "confirmation"
+      ]
+    },
+    {
+      "id": "dietary-cross-contact",
+      "question": "Can you guarantee an allergen-free vegan dinner?",
+      "sources": [
+        "dietary"
+      ],
+      "includes": [
+        "cannot guarantee",
+        "cross-contact"
+      ]
+    },
+    {
+      "id": "ev-parking",
+      "question": "Does the parking fee include electric vehicle charging?",
+      "sources": [
+        "parking",
+        "charging"
+      ],
+      "includes": [
+        "€28",
+        "does not include electricity"
+      ]
+    },
+    {
+      "id": "pool-weather",
+      "question": "Can the pool close during lightning even within opening hours?",
+      "sources": [
+        "pool-weather",
+        "pool"
+      ],
+      "includes": [
+        "7:00 AM",
+        "may close temporarily"
+      ]
+    },
+    {
+      "id": "baby-cot",
+      "question": "Is a cot guaranteed and does it increase room capacity?",
+      "sources": [
+        "cot"
+      ],
+      "includes": [
+        "must be confirmed",
+        "does not automatically increase"
+      ]
+    },
+    {
+      "id": "connecting",
+      "question": "Can you guarantee connecting rooms?",
+      "sources": [
+        "connecting-rooms"
+      ],
+      "includes": [
+        "request-only",
+        "do not guarantee"
+      ]
+    },
+    {
+      "id": "laundry",
+      "question": "What is the express laundry surcharge and turnaround?",
+      "sources": [
+        "laundry"
+      ],
+      "includes": [
+        "50%",
+        "next day"
+      ]
+    },
+    {
+      "id": "minibar",
+      "question": "Is the minibar included in any standard room rate?",
+      "sources": [
+        "minibar"
+      ],
+      "includes": [
+        "not included",
+        "not specify"
+      ]
+    },
+    {
+      "id": "room-service",
+      "question": "Is room service covered by breakfast and is there a delivery charge?",
+      "sources": [
+        "room-service",
+        "breakfast"
+      ],
+      "includes": [
+        "€6",
+        "not covered"
+      ]
+    },
+    {
+      "id": "visitors",
+      "question": "Can overnight visitors exceed the room capacity?",
+      "sources": [
+        "visitors"
+      ],
+      "includes": [
+        "fit the room’s capacity"
+      ]
+    },
+    {
+      "id": "smoking",
+      "question": "Can I smoke on the balcony?",
+      "sources": [
+        "smoking"
+      ],
+      "includes": [
+        "balconies",
+        "non-smoking"
+      ]
+    },
+    {
+      "id": "invoice",
+      "question": "Can I get a company invoice with tax details?",
+      "sources": [
+        "invoice"
+      ],
+      "includes": [
+        "before checkout",
+        "does not collect"
+      ]
+    },
+    {
+      "id": "lost-property",
+      "question": "How long do you keep lost property and who pays return shipping?",
+      "sources": [
+        "lost-property"
+      ],
+      "includes": [
+        "30 days",
+        "charged to the owner"
+      ]
+    },
+    {
+      "id": "quiet-hours",
+      "question": "When are quiet hours and can I have a party on the terrace?",
+      "sources": [
+        "quiet-hours"
+      ],
+      "includes": [
+        "10:00 PM",
+        "not permitted"
+      ]
+    }
+  ]
+}

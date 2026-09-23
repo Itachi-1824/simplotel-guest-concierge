@@ -4,7 +4,16 @@
     "location": "Amalfi Coast, Italy",
     "currency": "EUR",
     "timezone": "Europe/Rome",
-    "description": "A fictional coastal boutique hotel used for this demonstration."
+    "description": "A fictional coastal boutique hotel used for this demonstration.",
+    "contact": {
+      "demo": true,
+      "phone": "+1 202 555 0148",
+      "email": "frontdesk@cove.example",
+      "address": "12 Via delle Onde, 84011 Amalfi, Italy",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=Amalfi%2C%20Italy",
+      "mapLabel": "Explore the Amalfi area",
+      "notice": "Fictional demo contacts. The phone and email do not connect to a hotel; the street address is illustrative. The map opens the Amalfi area, not a real hotel entrance."
+    }
   },
   "facts": [
     {
@@ -178,12 +187,353 @@
         "transport",
         "concierge"
       ]
+    },
+    {
+      "id": "breakfast-hours",
+      "topic": "Dining",
+      "question": "When and where is breakfast served?",
+      "answer": "Breakfast is served in Sera from 7:00 AM to 10:30 AM. An early breakfast box may be requested before 6:00 PM the previous evening; availability and contents need hotel confirmation.",
+      "tags": [
+        "breakfast hours",
+        "breakfast time",
+        "early breakfast",
+        "breakfast box"
+      ]
+    },
+    {
+      "id": "dietary",
+      "topic": "Dining",
+      "question": "Can you accommodate allergies and dietary requirements?",
+      "answer": "Vegetarian and vegan dishes are available on request. Tell Sera about allergies at least 24 hours ahead; the kitchen cannot guarantee an allergen-free environment or absence of cross-contact. The team must confirm suitable dishes directly.",
+      "tags": [
+        "allergy",
+        "allergies",
+        "vegan",
+        "vegetarian",
+        "gluten",
+        "dietary"
+      ]
+    },
+    {
+      "id": "children-dining",
+      "topic": "Dining",
+      "question": "Do children have a menu at Sera?",
+      "answer": "Sera has a children’s dinner menu for ages 6–11 at a sample price of €18 per child. It is separate from breakfast and is not included in the room rate. Children must dine with an adult.",
+      "tags": [
+        "children menu",
+        "kids menu",
+        "child dinner"
+      ]
+    },
+    {
+      "id": "room-service",
+      "topic": "Dining",
+      "question": "What are the room service hours?",
+      "answer": "Room service operates from 12:00 noon to 9:30 PM. A €6 delivery charge applies per order in addition to menu prices. Room service is not covered by included breakfast.",
+      "tags": [
+        "room service",
+        "delivery",
+        "in room dining"
+      ]
+    },
+    {
+      "id": "water",
+      "topic": "In your room",
+      "question": "Is drinking water provided?",
+      "answer": "Each occupied room receives two complimentary 500 ml bottles of drinking water daily. Refill stations are available in the lobby. Other bottled drinks are chargeable.",
+      "tags": [
+        "drinking water",
+        "bottles",
+        "refill"
+      ]
+    },
+    {
+      "id": "minibar",
+      "topic": "In your room",
+      "question": "Is the minibar included?",
+      "answer": "Minibar items are not included in any standard room rate. Prices are shown in the in-room menu; charges are recorded when items are consumed. The sample guide does not specify individual item prices.",
+      "tags": [
+        "minibar",
+        "mini bar",
+        "drinks"
+      ]
+    },
+    {
+      "id": "laundry",
+      "topic": "Guest services",
+      "question": "Can I have clothes washed during my stay?",
+      "answer": "Laundry collected before 9:00 AM is normally returned by 7:00 PM the next day. Express laundry requires staff confirmation and carries a 50% surcharge. Individual garment prices are not supplied in the sample guide.",
+      "tags": [
+        "laundry",
+        "clothes",
+        "washing",
+        "express laundry"
+      ]
+    },
+    {
+      "id": "housekeeping",
+      "topic": "Guest services",
+      "question": "When is housekeeping available?",
+      "answer": "Daily housekeeping runs from 9:00 AM to 4:00 PM. Leave the privacy sign out to skip that visit, or ask reception for a preferred time. Exact service times cannot be guaranteed.",
+      "tags": [
+        "housekeeping",
+        "cleaning",
+        "privacy sign"
+      ]
+    },
+    {
+      "id": "linen",
+      "topic": "Guest services",
+      "question": "How often are towels and bed linen changed?",
+      "answer": "Towels are replaced when placed in the laundry basket. Bed linen is normally changed every third day, with an earlier change available on request. Hanging towels indicates that you would like to reuse them.",
+      "tags": [
+        "linen",
+        "bed sheets",
+        "towel change"
+      ]
+    },
+    {
+      "id": "luggage",
+      "topic": "Arrival and departure",
+      "question": "Can you store luggage before check-in or after check-out?",
+      "answer": "Reception offers complimentary luggage storage on arrival and departure days, subject to space. Overnight storage is not guaranteed. Please keep valuables and travel documents with you.",
+      "tags": [
+        "luggage",
+        "suitcases",
+        "bags",
+        "storage"
+      ]
+    },
+    {
+      "id": "reception",
+      "topic": "Arrival and departure",
+      "question": "Is reception open at night?",
+      "answer": "Reception is staffed 24 hours a day in the sample hotel guide. The contact panel provides fictional demo phone and email details only; it cannot reach a real front desk.",
+      "tags": [
+        "reception",
+        "front desk",
+        "24 hours",
+        "night desk"
+      ]
+    },
+    {
+      "id": "late-arrival",
+      "topic": "Arrival and departure",
+      "question": "What if I arrive after midnight?",
+      "answer": "For arrival after 11:00 PM, notify the hotel of your expected arrival time in advance. Reception is open overnight, but the hotel must confirm late-arrival instructions and whether a particular reservation will be held.",
+      "tags": [
+        "midnight",
+        "late arrival",
+        "after 11",
+        "overnight arrival"
+      ]
+    },
+    {
+      "id": "payments-info",
+      "topic": "Reservations",
+      "question": "Which payment methods does the hotel accept?",
+      "answer": "The sample hotel accepts Visa, Mastercard, and American Express at reception. A physical card in the lead guest’s name and photo identification may be requested. This assessment has no payment processor and cannot accept card details.",
+      "tags": [
+        "payment methods",
+        "visa",
+        "mastercard",
+        "amex",
+        "credit card"
+      ]
+    },
+    {
+      "id": "invoice",
+      "topic": "Reservations",
+      "question": "Can I get a company invoice?",
+      "answer": "Ask reception for an invoice and provide the billing name and address before checkout. Company tax details can be added when supplied in advance. The demo assistant does not collect these details or issue invoices.",
+      "tags": [
+        "invoice",
+        "company bill",
+        "billing",
+        "tax details"
+      ]
+    },
+    {
+      "id": "smoking",
+      "topic": "House policies",
+      "question": "Is smoking allowed?",
+      "answer": "All guest rooms, balconies, and indoor public areas are non-smoking. A designated smoking area is available outside the main entrance. The sample guide does not specify a cleaning penalty.",
+      "tags": [
+        "smoking",
+        "cigarettes",
+        "vaping"
+      ]
+    },
+    {
+      "id": "quiet-hours",
+      "topic": "House policies",
+      "question": "When are quiet hours?",
+      "answer": "Quiet hours are from 10:00 PM to 8:00 AM. Amplified music and private parties are not permitted in guest rooms or on terraces. Ask reception to resolve a noise concern.",
+      "tags": [
+        "quiet hours",
+        "noise",
+        "party",
+        "music"
+      ]
+    },
+    {
+      "id": "visitors",
+      "topic": "House policies",
+      "question": "Can a friend visit my room?",
+      "answer": "Day visitors must register at reception and leave by 10:00 PM. Overnight visitors must be added to the reservation and fit the room’s capacity. Visitor access to the pool requires hotel approval.",
+      "tags": [
+        "visitors",
+        "friends",
+        "overnight visitor"
+      ]
+    },
+    {
+      "id": "lost-property",
+      "topic": "Guest services",
+      "question": "What happens to lost items?",
+      "answer": "Non-perishable lost property is normally kept for 30 days. Contact the hotel with the item description and stay dates. Return shipping is charged to the owner and must be arranged directly with staff.",
+      "tags": [
+        "lost property",
+        "lost item",
+        "forgotten",
+        "left behind"
+      ]
+    },
+    {
+      "id": "cot",
+      "topic": "Families",
+      "question": "Can you provide a baby cot?",
+      "answer": "A baby cot can be requested for a child under 2 at no sample rental charge. Cots are limited and must be confirmed by the hotel. A cot does not automatically increase the room’s stated guest capacity; the hotel must approve the occupancy arrangement.",
+      "tags": [
+        "cot",
+        "crib",
+        "baby",
+        "infant"
+      ]
+    },
+    {
+      "id": "extra-bed",
+      "topic": "Families",
+      "question": "Can you add another bed to a room?",
+      "answer": "The room layouts in the guide are fixed. No extra rollaway bed is promised, and the stated capacity must not be exceeded. The Terrace Suite has a sofa bed; the Horizon Suite has a king bed and two single beds.",
+      "tags": [
+        "extra bed",
+        "rollaway",
+        "additional bed",
+        "sofa"
+      ]
+    },
+    {
+      "id": "connecting-rooms",
+      "topic": "Families",
+      "question": "Are connecting rooms guaranteed?",
+      "answer": "Connecting rooms are request-only and are not identified in the sample inventory. The hotel must confirm a connecting pair before you rely on it. Two independently available rooms do not guarantee that they connect.",
+      "tags": [
+        "connecting rooms",
+        "adjoining",
+        "next door",
+        "two rooms"
+      ]
+    },
+    {
+      "id": "charging",
+      "topic": "Getting here",
+      "question": "Is electric vehicle charging available?",
+      "answer": "Two shared 11 kW charging points are listed in the sample car park. Charging requires hotel confirmation and is billed separately by the charger operator. The €28 nightly parking charge does not include electricity.",
+      "tags": [
+        "electric vehicle",
+        "ev charging",
+        "charger",
+        "electric car"
+      ]
+    },
+    {
+      "id": "beach",
+      "topic": "Around the hotel",
+      "question": "How do I reach the beach?",
+      "answer": "The nearest public beach is approximately a 10-minute walk down a path with steps. Beach chairs and umbrellas belong to independent operators and are not included in the hotel rate. Ask the hotel about a suitable alternative if steps are a concern.",
+      "tags": [
+        "beach",
+        "sand",
+        "umbrellas",
+        "walk to sea"
+      ]
+    },
+    {
+      "id": "pool-towels",
+      "topic": "Wellbeing",
+      "question": "Are pool towels provided?",
+      "answer": "Complimentary pool towels can be collected from the pool attendant during pool opening hours. Return them at the pool before leaving. These towels are for hotel pool use and should not be taken to the beach.",
+      "tags": [
+        "pool towels",
+        "swimming towels"
+      ]
+    },
+    {
+      "id": "pool-weather",
+      "topic": "Wellbeing",
+      "question": "Can the pool close because of weather?",
+      "answer": "The outdoor pool may close temporarily during lightning, strong winds, maintenance, or unsafe conditions. Published hours do not guarantee access during a closure. Ask reception for the current status.",
+      "tags": [
+        "pool closure",
+        "weather",
+        "lightning",
+        "wind",
+        "maintenance"
+      ]
+    },
+    {
+      "id": "room-requests",
+      "topic": "Rooms",
+      "question": "Can you guarantee a high floor or a particular room number?",
+      "answer": "Floor level, room number, and a quiet location are preferences, not guarantees. The sample tool checks room categories only. Only the hotel can confirm a specific allocation, and a room-category quote does not reserve an individual room.",
+      "tags": [
+        "high floor",
+        "specific room",
+        "quiet room",
+        "room allocation"
+      ]
+    },
+    {
+      "id": "contact",
+      "topic": "Contact the hotel",
+      "question": "How can I contact the hotel by phone or email?",
+      "answer": "The fictional hotel’s sample contact details are +1 202 555 0148 and frontdesk@cove.example. These are non-working demonstration contacts, not a real reservations line or inbox. Open Hotel & contact to copy the sample details or view the area.",
+      "tags": [
+        "phone",
+        "telephone",
+        "number",
+        "email",
+        "contact",
+        "front desk",
+        "call"
+      ]
+    },
+    {
+      "id": "location",
+      "topic": "Location",
+      "question": "What is the hotel address and exact location?",
+      "answer": "The illustrative address is 12 Via delle Onde, 84011 Amalfi, Italy. The Cove Hotel is fictional; this address is a demo fixture and does not identify a real hotel building. The map link shows the Amalfi area only, not a verified entrance. A real booking must use the hotel’s confirmed address.",
+      "tags": [
+        "address",
+        "location",
+        "directions",
+        "map",
+        "where",
+        "street",
+        "exact"
+      ]
     }
   ],
   "rooms": [
     {
       "id": "classic",
       "name": "Classic Room",
+      "bed": "Queen bed",
+      "areaSqm": 24,
+      "view": "View not specified",
+      "terrace": false,
+      "breakfastIncluded": false,
       "capacity": 2,
       "basePrice": 190,
       "inventory": 8,
@@ -193,6 +543,11 @@
     {
       "id": "sea-view",
       "name": "Sea View Room",
+      "bed": "King bed",
+      "areaSqm": 29,
+      "view": "Sea view",
+      "terrace": false,
+      "breakfastIncluded": false,
       "capacity": 2,
       "basePrice": 265,
       "inventory": 6,
@@ -202,6 +557,11 @@
     {
       "id": "terrace",
       "name": "Terrace Suite",
+      "bed": "King bed and sofa bed",
+      "areaSqm": 42,
+      "view": "Private terrace; view not specified",
+      "terrace": true,
+      "breakfastIncluded": true,
       "capacity": 3,
       "basePrice": 390,
       "inventory": 4,
@@ -211,11 +571,24 @@
     {
       "id": "horizon",
       "name": "Horizon Suite",
+      "bed": "King bed and two single beds",
+      "areaSqm": 56,
+      "view": "Panoramic terrace",
+      "terrace": true,
+      "breakfastIncluded": true,
       "capacity": 4,
       "basePrice": 520,
       "inventory": 2,
       "description": "A generous suite made for shared coastal escapes.",
       "icon": "horizon"
     }
-  ]
+  ],
+  "demoData": {
+    "fictional": true,
+    "version": "2026-09-23-expanded",
+    "propertyCount": 1,
+    "roomCategories": 4,
+    "factCount": 42,
+    "scope": "Assessment fixtures only. No live inventory, rates, room assignments, reservations, or payments."
+  }
 }

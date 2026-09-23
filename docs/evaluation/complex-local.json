@@ -1,0 +1,1198 @@
+{
+  "localModels": true,
+  "total": 16,
+  "passed": 16,
+  "results": [
+    {
+      "id": "luggage-arrival",
+      "passed": true,
+      "durationMs": 3310,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Reception offers complimentary luggage storage on arrival and departure days, subject to space. Overnight storage is not guaranteed. Please keep valuables and travel documents with you.\n\nCheck-in begins at 3:00 PM. Check-out is by 11:00 AM. Early check-in and late check-out are subject to availability and cannot be guaranteed.",
+        "sources": [
+          {
+            "id": "luggage",
+            "topic": "Arrival and departure"
+          },
+          {
+            "id": "arrival",
+            "topic": "Stay essentials"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can I store luggage before check-in?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "arrival",
+              "luggage"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Can I store luggage before check-in?",
+              "Can I store luggage before check-in? arrival",
+              "Can I store luggage before check-in? luggage"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can I store luggage before check-in?",
+          "evidence": [
+            {
+              "id": "luggage",
+              "lexicalScore": 14.689403937256145,
+              "semanticScore": 0.8307498693466187,
+              "rerankScore": 0.9998083710670471
+            },
+            {
+              "id": "arrival",
+              "lexicalScore": 3.1492493757306197,
+              "semanticScore": 0.3246539235115051,
+              "rerankScore": 0.000017637830751482397
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "luggage",
+              "score": 0.81635,
+              "choice": "A",
+              "confidence": 0.6327
+            },
+            {
+              "id": "room-requests",
+              "score": 0.2683,
+              "choice": "B",
+              "confidence": 0.4634
+            },
+            {
+              "id": "laundry",
+              "score": 0.2825,
+              "choice": "B",
+              "confidence": 0.435
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "midnight-arrival",
+      "passed": true,
+      "durationMs": 3380,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Reception is staffed 24 hours a day. Use the reception desk for urgent on-property assistance. No public telephone number is provided for this fictional hotel.\n\nFor arrival after 11:00 PM, notify the hotel of your expected arrival time in advance. Reception is open overnight, but the hotel must confirm late-arrival instructions and whether a particular reservation will be held.",
+        "sources": [
+          {
+            "id": "reception",
+            "topic": "Arrival and departure"
+          },
+          {
+            "id": "late-arrival",
+            "topic": "Arrival and departure"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "I arrive after midnight. Is reception staffed?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "arrival",
+              "late-arrival",
+              "reception"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "I arrive after midnight. Is reception staffed?",
+              "I arrive after midnight. Is reception staffed? arrival",
+              "I arrive after midnight. Is reception staffed? late-arrival",
+              "I arrive after midnight. Is reception staffed? reception"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "I arrive after midnight. Is reception staffed?",
+          "evidence": [
+            {
+              "id": "reception",
+              "lexicalScore": 6.00941174126911,
+              "semanticScore": 0.6822713613510132,
+              "rerankScore": 0.9841655492782593,
+              "graph": {
+                "from": "late-arrival",
+                "relation": "overnight_service"
+              }
+            },
+            {
+              "id": "late-arrival",
+              "lexicalScore": 14.778779482336768,
+              "semanticScore": 0.6599807739257812,
+              "rerankScore": 0.9993579983711243
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "late-arrival",
+              "score": 0.74785,
+              "choice": "A",
+              "confidence": 0.4957
+            },
+            {
+              "id": "reception",
+              "score": 0.8056,
+              "choice": "A",
+              "confidence": 0.6112
+            },
+            {
+              "id": "visitors",
+              "score": 0.7533000000000001,
+              "choice": "A",
+              "confidence": 0.5066
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "breakfast-schedule",
+      "passed": true,
+      "durationMs": 3361,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Breakfast is served in Sera from 7:00 AM to 10:30 AM. An early breakfast box may be requested before 6:00 PM the previous evening; availability and contents need hotel confirmation.\n\nBreakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.",
+        "sources": [
+          {
+            "id": "breakfast-hours",
+            "topic": "Dining"
+          },
+          {
+            "id": "breakfast",
+            "topic": "Dining"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "When is breakfast served and can I get an early breakfast box?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "breakfast",
+              "breakfast-hours"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "When is breakfast served and can I get an early breakfast box?",
+              "When is breakfast served and can I get an early breakfast box? breakfast",
+              "When is breakfast served and can I get an early breakfast box? breakfast-hours"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "When is breakfast served and can I get an early breakfast box?",
+          "evidence": [
+            {
+              "id": "breakfast-hours",
+              "lexicalScore": 16.404947579178405,
+              "semanticScore": 0.7564236521720886,
+              "rerankScore": 0.9998088479042053
+            },
+            {
+              "id": "breakfast",
+              "lexicalScore": 2.81643797951013,
+              "semanticScore": 0.5573961734771729,
+              "rerankScore": 0.0013835092540830374
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "breakfast-hours",
+              "score": 0.62935,
+              "choice": "A",
+              "confidence": 0.2587
+            },
+            {
+              "id": "breakfast",
+              "score": 0.7662,
+              "choice": "A",
+              "confidence": 0.5324
+            },
+            {
+              "id": "room-service",
+              "score": 0.55085,
+              "choice": "A",
+              "confidence": 0.1017
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dietary-cross-contact",
+      "passed": true,
+      "durationMs": 3238,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Vegetarian and vegan dishes are available on request. Tell Sera about allergies at least 24 hours ahead; the kitchen cannot guarantee an allergen-free environment or absence of cross-contact. The team must confirm suitable dishes directly.\n\nThe hotel restaurant, Sera, serves coastal Italian cuisine for dinner from 6:30 PM to 10:00 PM. Reservations are recommended.",
+        "sources": [
+          {
+            "id": "dietary",
+            "topic": "Dining"
+          },
+          {
+            "id": "dining",
+            "topic": "Dining"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can you guarantee an allergen-free vegan dinner?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "dining",
+              "dietary"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Can you guarantee an allergen-free vegan dinner?",
+              "Can you guarantee an allergen-free vegan dinner? dining",
+              "Can you guarantee an allergen-free vegan dinner? dietary"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can you guarantee an allergen-free vegan dinner?",
+          "evidence": [
+            {
+              "id": "dietary",
+              "lexicalScore": 11.698244368381463,
+              "semanticScore": 0.6796529293060303,
+              "rerankScore": 0.9990063309669495,
+              "graph": {
+                "from": "dining",
+                "relation": "dietary_conditions"
+              }
+            },
+            {
+              "id": "dining",
+              "lexicalScore": 4.297947859306576,
+              "semanticScore": 0.22636142373085022,
+              "rerankScore": 0.000013716917237616144
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "dietary",
+              "score": 0.7822,
+              "choice": "A",
+              "confidence": 0.5644
+            },
+            {
+              "id": "breakfast",
+              "score": 0.3634,
+              "choice": "B",
+              "confidence": 0.2732
+            },
+            {
+              "id": "children-dining",
+              "score": 0.45395,
+              "choice": "B",
+              "confidence": 0.0921
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ev-parking",
+      "passed": true,
+      "durationMs": 2936,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Two shared 11 kW charging points are listed in the sample car park. Charging requires hotel confirmation and is billed separately by the charger operator. The €28 nightly parking charge does not include electricity.\n\nValet parking is available for €28 per night. Spaces are limited, so please request a place before arrival.",
+        "sources": [
+          {
+            "id": "charging",
+            "topic": "Getting here"
+          },
+          {
+            "id": "parking",
+            "topic": "Getting here"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Does the parking fee include electric vehicle charging?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "parking",
+              "charging"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Does the parking fee include electric vehicle charging?",
+              "Does the parking fee include electric vehicle charging? parking",
+              "Does the parking fee include electric vehicle charging? charging"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Does the parking fee include electric vehicle charging?",
+          "evidence": [
+            {
+              "id": "charging",
+              "lexicalScore": 19.191867305561427,
+              "semanticScore": 0.7005476951599121,
+              "rerankScore": 0.9998088479042053,
+              "graph": {
+                "from": "parking",
+                "relation": "separate_service_charge"
+              }
+            },
+            {
+              "id": "parking",
+              "lexicalScore": 5.061181886857396,
+              "semanticScore": 0.404049277305603,
+              "rerankScore": 0.0002586586051620543
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "charging",
+              "score": 0.7713,
+              "choice": "A",
+              "confidence": 0.5426
+            },
+            {
+              "id": "parking",
+              "score": 0.7045,
+              "choice": "A",
+              "confidence": 0.409
+            },
+            {
+              "id": "water",
+              "score": 0.46315,
+              "choice": "B",
+              "confidence": 0.0737
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pool-weather",
+      "passed": true,
+      "durationMs": 3120,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "The outdoor pool may close temporarily during lightning, strong winds, maintenance, or unsafe conditions. Published hours do not guarantee access during a closure. Ask reception for the current status.\n\nYes. The outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM. Children under 12 must be accompanied by an adult.",
+        "sources": [
+          {
+            "id": "pool-weather",
+            "topic": "Wellbeing"
+          },
+          {
+            "id": "pool",
+            "topic": "Wellbeing"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can the pool close during lightning even within opening hours?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "pool",
+              "pool-weather"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Can the pool close during lightning even within opening hours?",
+              "Can the pool close during lightning even within opening hours? pool",
+              "Can the pool close during lightning even within opening hours? pool-weather"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can the pool close during lightning even within opening hours?",
+          "evidence": [
+            {
+              "id": "pool-weather",
+              "lexicalScore": 17.96442959611317,
+              "semanticScore": 0.7799527645111084,
+              "rerankScore": 0.9997040629386902
+            },
+            {
+              "id": "pool",
+              "lexicalScore": 5.805112898197964,
+              "semanticScore": 0.47684380412101746,
+              "rerankScore": 0.3969615697860718
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "pool-weather",
+              "score": 0.7675000000000001,
+              "choice": "A",
+              "confidence": 0.535
+            },
+            {
+              "id": "pool",
+              "score": 0.65805,
+              "choice": "A",
+              "confidence": 0.3161
+            },
+            {
+              "id": "pool-towels",
+              "score": 0.5217,
+              "choice": "A",
+              "confidence": 0.0434
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "baby-cot",
+      "passed": true,
+      "durationMs": 3210,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "A baby cot can be requested for a child under 2 at no sample rental charge. Cots are limited and must be confirmed by the hotel. A cot does not automatically increase the room’s stated guest capacity; the hotel must approve the occupancy arrangement.",
+        "sources": [
+          {
+            "id": "cot",
+            "topic": "Families"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Is a cot guaranteed and does it increase room capacity?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "cot"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Is a cot guaranteed and does it increase room capacity?",
+              "Is a cot guaranteed and does it increase room capacity? cot"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Is a cot guaranteed and does it increase room capacity?",
+          "evidence": [
+            {
+              "id": "cot",
+              "lexicalScore": 12.007580580789641,
+              "semanticScore": 0.5953906774520874,
+              "rerankScore": 0.9987108707427979
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "cot",
+              "score": 0.67665,
+              "choice": "A",
+              "confidence": 0.3533
+            },
+            {
+              "id": "extra-bed",
+              "score": 0.50175,
+              "choice": "A",
+              "confidence": 0.0035
+            },
+            {
+              "id": "room-requests",
+              "score": 0.32545,
+              "choice": "B",
+              "confidence": 0.3491
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "connecting",
+      "passed": true,
+      "durationMs": 3082,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Connecting rooms are request-only and are not identified in the sample inventory. The hotel must confirm a connecting pair before you rely on it. Two independently available rooms do not guarantee that they connect.",
+        "sources": [
+          {
+            "id": "connecting-rooms",
+            "topic": "Families"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can you guarantee connecting rooms?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "connecting-rooms"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Can you guarantee connecting rooms?",
+              "Can you guarantee connecting rooms? connecting-rooms"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can you guarantee connecting rooms?",
+          "evidence": [
+            {
+              "id": "connecting-rooms",
+              "lexicalScore": 9.339792676789173,
+              "semanticScore": 0.7905116081237793,
+              "rerankScore": 0.9999123811721802
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "connecting-rooms",
+              "score": 0.7881,
+              "choice": "A",
+              "confidence": 0.5762
+            },
+            {
+              "id": "room-requests",
+              "score": 0.3365,
+              "choice": "B",
+              "confidence": 0.327
+            },
+            {
+              "id": "extra-bed",
+              "score": 0.55245,
+              "choice": "A",
+              "confidence": 0.1049
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "laundry",
+      "passed": true,
+      "durationMs": 2797,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Laundry collected before 9:00 AM is normally returned by 7:00 PM the next day. Express laundry requires staff confirmation and carries a 50% surcharge. Individual garment prices are not supplied in the sample guide.",
+        "sources": [
+          {
+            "id": "laundry",
+            "topic": "Guest services"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "What is the express laundry surcharge and turnaround?",
+            "followUp": false,
+            "entities": [],
+            "topics": [],
+            "needsClarification": false,
+            "candidates": [
+              "What is the express laundry surcharge and turnaround?"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "What is the express laundry surcharge and turnaround?",
+          "evidence": [
+            {
+              "id": "laundry",
+              "lexicalScore": 11.124785563487343,
+              "semanticScore": 0.5461468696594238,
+              "rerankScore": 0.9651696681976318
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "laundry",
+              "score": 0.6991,
+              "choice": "A",
+              "confidence": 0.3982
+            },
+            {
+              "id": "payments-info",
+              "score": 0.40585,
+              "choice": "B",
+              "confidence": 0.1883
+            },
+            {
+              "id": "cancellation",
+              "score": 0.37629999999999997,
+              "choice": "B",
+              "confidence": 0.2474
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "minibar",
+      "passed": true,
+      "durationMs": 2731,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.\n\nMinibar items are not included in any standard room rate. Prices are shown in the in-room menu; charges are recorded when items are consumed. The sample guide does not specify individual item prices.",
+        "sources": [
+          {
+            "id": "breakfast",
+            "topic": "Dining"
+          },
+          {
+            "id": "minibar",
+            "topic": "In your room"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Is the minibar included in any standard room rate?",
+            "followUp": false,
+            "entities": [],
+            "topics": [],
+            "needsClarification": false,
+            "candidates": [
+              "Is the minibar included in any standard room rate?"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Is the minibar included in any standard room rate?",
+          "evidence": [
+            {
+              "id": "breakfast",
+              "lexicalScore": 3.512806967818454,
+              "semanticScore": 0.30826231837272644,
+              "rerankScore": 0.0001425575464963913,
+              "graph": {
+                "from": "classic",
+                "relation": "meal_policy"
+              }
+            },
+            {
+              "id": "minibar",
+              "lexicalScore": 16.956748070422293,
+              "semanticScore": 0.8225226402282715,
+              "rerankScore": 0.9999126195907593
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "minibar",
+              "score": 0.72075,
+              "choice": "A",
+              "confidence": 0.4415
+            },
+            {
+              "id": "classic",
+              "score": 0.5004,
+              "choice": "A",
+              "confidence": 0.0008
+            },
+            {
+              "id": "sea-view",
+              "score": 0.49995,
+              "choice": "B",
+              "confidence": 0.0001
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "room-service",
+      "passed": true,
+      "durationMs": 3356,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Breakfast is included with the Terrace Suite and Horizon Suite. For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day. Children under 6 eat free.\n\nRoom service operates from 12:00 noon to 9:30 PM. A €6 delivery charge applies per order in addition to menu prices. Room service is not covered by included breakfast.",
+        "sources": [
+          {
+            "id": "breakfast",
+            "topic": "Dining"
+          },
+          {
+            "id": "room-service",
+            "topic": "Dining"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Is room service covered by breakfast and is there a delivery charge?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "breakfast",
+              "room-service"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Is room service covered by breakfast and is there a delivery charge?",
+              "Is room service covered by breakfast and is there a delivery charge? breakfast",
+              "Is room service covered by breakfast and is there a delivery charge? room-service"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Is room service covered by breakfast and is there a delivery charge?",
+          "evidence": [
+            {
+              "id": "breakfast",
+              "lexicalScore": 3.9995954068122517,
+              "semanticScore": 0.5618788003921509,
+              "rerankScore": 0.02211518958210945
+            },
+            {
+              "id": "room-service",
+              "lexicalScore": 19.23899174084609,
+              "semanticScore": 0.5730957984924316,
+              "rerankScore": 0.9998431205749512
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "room-service",
+              "score": 0.5118,
+              "choice": "A",
+              "confidence": 0.0236
+            },
+            {
+              "id": "breakfast",
+              "score": 0.6952,
+              "choice": "A",
+              "confidence": 0.3904
+            },
+            {
+              "id": "classic",
+              "score": 0.5974,
+              "choice": "A",
+              "confidence": 0.1948
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "visitors",
+      "passed": true,
+      "durationMs": 2675,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Day visitors must register at reception and leave by 10:00 PM. Overnight visitors must be added to the reservation and fit the room’s capacity. Visitor access to the pool requires hotel approval.",
+        "sources": [
+          {
+            "id": "visitors",
+            "topic": "House policies"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can overnight visitors exceed the room capacity?",
+            "followUp": false,
+            "entities": [],
+            "topics": [],
+            "needsClarification": false,
+            "candidates": [
+              "Can overnight visitors exceed the room capacity?"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can overnight visitors exceed the room capacity?",
+          "evidence": [
+            {
+              "id": "visitors",
+              "lexicalScore": 12.12852503011446,
+              "semanticScore": 0.6780462265014648,
+              "rerankScore": 0.9991834759712219
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "visitors",
+              "score": 0.7296,
+              "choice": "A",
+              "confidence": 0.4592
+            },
+            {
+              "id": "room-service",
+              "score": 0.49285,
+              "choice": "B",
+              "confidence": 0.0143
+            },
+            {
+              "id": "classic",
+              "score": 0.71375,
+              "choice": "A",
+              "confidence": 0.4275
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "smoking",
+      "passed": true,
+      "durationMs": 3036,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "All guest rooms, balconies, and indoor public areas are non-smoking. A designated smoking area is available outside the main entrance. The sample guide does not specify a cleaning penalty.",
+        "sources": [
+          {
+            "id": "smoking",
+            "topic": "House policies"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can I smoke on the balcony?",
+            "followUp": false,
+            "entities": [],
+            "topics": [
+              "smoking"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "Can I smoke on the balcony?",
+              "Can I smoke on the balcony? smoking"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can I smoke on the balcony?",
+          "evidence": [
+            {
+              "id": "smoking",
+              "lexicalScore": 5.971012326435433,
+              "semanticScore": 0.5956403613090515,
+              "rerankScore": 0.00003394606392248534
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "smoking",
+              "score": 0.70105,
+              "choice": "A",
+              "confidence": 0.4021
+            },
+            {
+              "id": "extra-bed",
+              "score": 0.32355,
+              "choice": "B",
+              "confidence": 0.3529
+            },
+            {
+              "id": "terrace",
+              "score": 0.4994,
+              "choice": "B",
+              "confidence": 0.0012
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "invoice",
+      "passed": true,
+      "durationMs": 2798,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Ask reception for an invoice and provide the billing name and address before checkout. Company tax details can be added when supplied in advance. The demo assistant does not collect these details or issue invoices.",
+        "sources": [
+          {
+            "id": "invoice",
+            "topic": "Reservations"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "Can I get a company invoice with tax details?",
+            "followUp": false,
+            "entities": [],
+            "topics": [],
+            "needsClarification": false,
+            "candidates": [
+              "Can I get a company invoice with tax details?"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "Can I get a company invoice with tax details?",
+          "evidence": [
+            {
+              "id": "invoice",
+              "lexicalScore": 24.554989770948715,
+              "semanticScore": 0.7976375818252563,
+              "rerankScore": 0.9998600482940674
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "invoice",
+              "score": 0.704,
+              "choice": "A",
+              "confidence": 0.408
+            },
+            {
+              "id": "payments-info",
+              "score": 0.46025,
+              "choice": "B",
+              "confidence": 0.0795
+            },
+            {
+              "id": "laundry",
+              "score": 0.24864999999999998,
+              "choice": "B",
+              "confidence": 0.5027
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "lost-property",
+      "passed": true,
+      "durationMs": 2938,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Non-perishable lost property is normally kept for 30 days. Contact the hotel with the item description and stay dates. Return shipping is charged to the owner and must be arranged directly with staff.\n\nReception offers complimentary luggage storage on arrival and departure days, subject to space. Overnight storage is not guaranteed. Please keep valuables and travel documents with you.",
+        "sources": [
+          {
+            "id": "lost-property",
+            "topic": "Guest services"
+          },
+          {
+            "id": "luggage",
+            "topic": "Arrival and departure"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "How long do you keep lost property and who pays return shipping?",
+            "followUp": false,
+            "entities": [],
+            "topics": [],
+            "needsClarification": false,
+            "candidates": [
+              "How long do you keep lost property and who pays return shipping?"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "How long do you keep lost property and who pays return shipping?",
+          "evidence": [
+            {
+              "id": "lost-property",
+              "lexicalScore": 15.711372941607793,
+              "semanticScore": 0.6519721746444702,
+              "rerankScore": 0.9995889067649841
+            },
+            {
+              "id": "luggage",
+              "lexicalScore": 3.2747345425206333,
+              "semanticScore": 0.16309309005737305,
+              "rerankScore": 0.000024693496015970595
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "lost-property",
+              "score": 0.71845,
+              "choice": "A",
+              "confidence": 0.4369
+            },
+            {
+              "id": "laundry",
+              "score": 0.4759,
+              "choice": "B",
+              "confidence": 0.0482
+            },
+            {
+              "id": "cancellation",
+              "score": 0.42645,
+              "choice": "B",
+              "confidence": 0.1471
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "quiet-hours",
+      "passed": true,
+      "durationMs": 3253,
+      "missingSources": [],
+      "missingPhrases": [],
+      "response": {
+        "type": "answer",
+        "answer": "Quiet hours are from 10:00 PM to 8:00 AM. Amplified music and private parties are not permitted in guest rooms or on terraces. Ask reception to resolve a noise concern.\n\nThe Terrace Suite sleeps up to 3 guests with a king bed and sofa bed. It is 42 m², has a private terrace, includes breakfast, and starts at €390 per night.",
+        "sources": [
+          {
+            "id": "quiet-hours",
+            "topic": "House policies"
+          },
+          {
+            "id": "terrace",
+            "topic": "Rooms"
+          }
+        ],
+        "trace": {
+          "mode": "grounded-extractive",
+          "queryPlan": {
+            "query": "When are quiet hours and can I have a party on the terrace?",
+            "followUp": false,
+            "entities": [
+              "terrace"
+            ],
+            "topics": [
+              "quiet-hours"
+            ],
+            "needsClarification": false,
+            "candidates": [
+              "When are quiet hours and can I have a party on the terrace?",
+              "When are quiet hours and can I have a party on the terrace? quiet-hours"
+            ]
+          },
+          "localModels": {
+            "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+            "reranker": "ms-marco-TinyBERT-L-2-v2",
+            "classifier": "convaiinnovations/laya"
+          },
+          "selectedQuery": "When are quiet hours and can I have a party on the terrace?",
+          "evidence": [
+            {
+              "id": "quiet-hours",
+              "lexicalScore": 10.67682445719052,
+              "semanticScore": 0.7568805813789368,
+              "rerankScore": 0.9996180534362793
+            },
+            {
+              "id": "terrace",
+              "lexicalScore": 3.3918788302694574,
+              "semanticScore": 0.5050898194313049,
+              "rerankScore": 0.000027400001272326335
+            }
+          ],
+          "layaJudgments": [
+            {
+              "id": "quiet-hours",
+              "score": 0.7358,
+              "choice": "A",
+              "confidence": 0.4716
+            },
+            {
+              "id": "room-service",
+              "score": 0.46725,
+              "choice": "B",
+              "confidence": 0.0655
+            },
+            {
+              "id": "late-arrival",
+              "score": 0.34895,
+              "choice": "B",
+              "confidence": 0.3021
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "scope": "Decision-threshold selection on 20 development cases only. Model weights and temperatures unchanged. Scores are not calibrated probabilities.",
+  "minimumConfidence": 0.1,
+  "minimumMargin": 0.3,
+  "candidates": [
+    {
+      "minWinner": 0.65,
+      "correct": 4,
+      "incorrect": 5,
+      "abstained": 8
+    },
+    {
+      "minWinner": 0.7,
+      "correct": 4,
+      "incorrect": 5,
+      "abstained": 8
+    },
+    {
+      "minWinner": 0.75,
+      "correct": 4,
+      "incorrect": 2,
+      "abstained": 11
+    },
+    {
+      "minWinner": 0.8,
+      "correct": 4,
+      "incorrect": 2,
+      "abstained": 11
+    },
+    {
+      "minWinner": 0.85,
+      "correct": 4,
+      "incorrect": 2,
+      "abstained": 11
+    },
+    {
+      "minWinner": 0.9,
+      "correct": 4,
+      "incorrect": 0,
+      "abstained": 13
+    },
+    {
+      "minWinner": 0.95,
+      "correct": 0,
+      "incorrect": 0,
+      "abstained": 17
+    }
+  ],
+  "selected": {
+    "minWinner": 0.9,
+    "correct": 4,
+    "incorrect": 0,
+    "abstained": 13
+  }
+}

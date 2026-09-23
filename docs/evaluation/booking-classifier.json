@@ -1,0 +1,150 @@
+[
+  {
+    "question": "Book a room where I can look out at the ocean, with the morning meal included in the rate.",
+    "expected": {
+      "view": "sea",
+      "breakfast": "included"
+    },
+    "result": {
+      "view": {
+        "type": "choice",
+        "choice": "sea",
+        "probabilities": {
+          "sea": 0.6671,
+          "terrace": 0.1164,
+          "unspecified": 0.2164
+        },
+        "confidence": 0.2248,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "breakfast": {
+        "type": "choice",
+        "choice": "included",
+        "probabilities": {
+          "included": 0.7016,
+          "unspecified": 0.2984
+        },
+        "confidence": 0.1207,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "classifier": "convaiinnovations/laya",
+      "role": "Local classifier, not an LLM"
+    },
+    "durationMs": 8404
+  },
+  {
+    "question": "Plan my stay 5-7 October for 3 guests.",
+    "expected": {
+      "view": "unspecified",
+      "breakfast": "unspecified"
+    },
+    "result": {
+      "view": {
+        "type": "choice",
+        "choice": "unspecified",
+        "probabilities": {
+          "sea": 0.1493,
+          "terrace": 0.1541,
+          "unspecified": 0.6967
+        },
+        "confidence": 0.2501,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "breakfast": {
+        "type": "choice",
+        "choice": "unspecified",
+        "probabilities": {
+          "included": 0.2872,
+          "unspecified": 0.7128
+        },
+        "confidence": 0.135,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "classifier": "convaiinnovations/laya",
+      "role": "Local classifier, not an LLM"
+    },
+    "durationMs": 398
+  },
+  {
+    "question": "Find a room with a private outdoor terrace.",
+    "expected": {
+      "view": "terrace",
+      "breakfast": "unspecified"
+    },
+    "result": {
+      "view": {
+        "type": "choice",
+        "choice": "terrace",
+        "probabilities": {
+          "sea": 0.0434,
+          "terrace": 0.8653,
+          "unspecified": 0.0913
+        },
+        "confidence": 0.5632,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "breakfast": {
+        "type": "choice",
+        "choice": "unspecified",
+        "probabilities": {
+          "included": 0.2207,
+          "unspecified": 0.7793
+        },
+        "confidence": 0.2385,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "classifier": "convaiinnovations/laya",
+      "role": "Local classifier, not an LLM"
+    },
+    "durationMs": 395
+  },
+  {
+    "question": "Book any room, no breakfast needed.",
+    "expected": {
+      "view": "unspecified",
+      "breakfast": "unspecified"
+    },
+    "result": {
+      "view": {
+        "type": "choice",
+        "choice": "unspecified",
+        "probabilities": {
+          "sea": 0.118,
+          "terrace": 0.109,
+          "unspecified": 0.773
+        },
+        "confidence": 0.3694,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "breakfast": {
+        "type": "choice",
+        "choice": "included",
+        "probabilities": {
+          "included": 0.5275,
+          "unspecified": 0.4725
+        },
+        "confidence": 0.0022,
+        "action": {
+          "act_probability": 1.0
+        }
+      },
+      "classifier": "convaiinnovations/laya",
+      "role": "Local classifier, not an LLM"
+    },
+    "durationMs": 391
+  }
+]

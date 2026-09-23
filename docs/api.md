@@ -10,7 +10,8 @@ curl http://localhost:4321/api/chat -H "Content-Type: application/json" -d '{"qu
 {
   "type": "answer",
   "answer": "Check-in begins at 3:00 PM. Check-out is by 11:00 AM. Early check-in and late check-out are subject to availability and cannot be guaranteed.",
-  "sources": [{"id": "arrival", "topic": "Stay essentials"}]
+  "sources": [{"id": "arrival", "topic": "Stay essentials"}],
+  "demo": true
 }
 ```
 
@@ -37,11 +38,23 @@ Invoke-RestMethod http://localhost:4321/api/chat -Method Post -ContentType 'appl
 | --- | --- |
 | `answer` | `answer`, `sources` |
 | `clarification` / `fallback` | `answer`, empty `sources` |
-| `availability-needed` | `answer`, `missing` |
-| `availability` | `availability`: dates, adults, nights, rooms, currency, `mock: true` |
+| `availability-needed` | `answer`, `missing`, partial `stay`, `preferences` |
+| `availability` | `availability`: dates, adults, nights, rooms, currency, `mock: true`; complete natural requests include `bookingPlan` |
 
 Room results contain ID, name, description, capacity, nightly price, total price, and remaining sample inventory. An empty room list is a valid result. Stays must be 1–30 nights, with 1–4 guests and valid, non-past ISO dates.
 
-Validation failures return HTTP `400` with `{ "error": "..." }`; oversized requests return `413`; unexpected backend failures return `503`. Questions are 2–600 characters. History accepts up to 16 user/assistant turns, each up to 1,200 characters; the assistant uses the most recent eight. Invalid history roles are rejected.
+All successful chat responses include `demo: true`. The property, facts, rates, and inventory are fictional stub data; see [reviewer examples](demo-data.md).
+
+Validation failures return HTTP `400` with `{ "error": "..." }`; oversized requests return `413`; unexpected backend failures return `503`. Questions are 2–600 characters, with a single digit also allowed for guest-count replies. History accepts up to 16 user/assistant turns, each up to 1,200 characters; the assistant uses the most recent eight. Invalid history roles are rejected.
+
+Chat also accepts `bookingContext: {stay: {checkIn, checkOut, adults}, preferences}`. Fields may be omitted while details are collected. This preserves the active stay beyond the short text history. Dates, counts, and preferences are validated; client prices or extra properties cannot alter inventory or quotes. Current explicit changes override the saved values. An empty availability result may include `alternatives`, each containing changed dates, the same guests and nights, and a matching sample room. Choosing one still requires a fresh `/api/quote` request.
 
 `GET /api/health` checks the app. Local AI status and API documentation are at `http://127.0.0.1:8001/health` and `/docs`. The browser never calls the local model service directly.
+
+## Stay preferences and review
+
+Chat accepts optional `preferences`: `nightlyBudget` (EUR per night, 1–10,000 or null), `view` (`any`, `sea`, `terrace`), `breakfastIncluded` (boolean), and `roomId` (a fixture category or null). Explicit values override inferred preferences. The natural-language flow returns a `bookingPlan` containing validated stay details, selected room, preferences, and `autonomous: true`.
+
+`POST /api/quote` accepts `{ "roomId": "terrace", "stay": { "checkIn": "2026-10-05", "checkOut": "2026-10-07", "adults": 3 }, "preferences": { "nightlyBudget": 400 } }`. Use future dates. It returns the server-calculated quote, a comparison report, 15-minute expiry, `demo: true`, and `paymentEnabled: false`. Unknown rooms or invalid inputs return 400; unavailable or nonmatching rooms return 409. Client-supplied prices are ignored. The UI requests a fresh quote again on confirmation. There is no payment API.
+
+The private Python `POST /v1/booking-intent` accepts `{ "question": "..." }` and returns bounded Laya outlook/breakfast choices. It is not exposed to browser clients.

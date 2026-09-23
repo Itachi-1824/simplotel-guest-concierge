@@ -1,5 +1,4 @@
 {
-  "date": "2026-09-23T15:16:22.962Z",
   "mode": "baseline",
   "clock": "2026-10-01 fixed for repeatable availability",
   "models": null,
@@ -9,7 +8,7 @@
     {
       "id": "check-in",
       "passed": true,
-      "durationMs": 2,
+      "durationMs": 33,
       "type": "answer",
       "sources": [
         {
@@ -38,7 +37,7 @@
         "evidence": [
           {
             "id": "arrival",
-            "lexicalScore": 4.633092782624953,
+            "lexicalScore": 6.158031904286135,
             "semanticScore": 0.783235934410243,
             "rerankScore": 0
           }
@@ -49,7 +48,7 @@
     {
       "id": "pool",
       "passed": true,
-      "durationMs": 1,
+      "durationMs": 24,
       "type": "answer",
       "sources": [
         {
@@ -78,7 +77,7 @@
         "evidence": [
           {
             "id": "pool",
-            "lexicalScore": 4.352074008667792,
+            "lexicalScore": 4.328821818348039,
             "semanticScore": 0.8870655251454875,
             "rerankScore": 0
           }
@@ -119,7 +118,7 @@
         "evidence": [
           {
             "id": "breakfast",
-            "lexicalScore": 0.8789986362950084,
+            "lexicalScore": 1.2635745175383402,
             "semanticScore": 0.13699915608779778,
             "rerankScore": 0,
             "graph": {
@@ -129,7 +128,7 @@
           },
           {
             "id": "terrace",
-            "lexicalScore": 8.61505189685115,
+            "lexicalScore": 11.58194020977669,
             "semanticScore": 0.8153742483272114,
             "rerankScore": 0
           }
@@ -140,7 +139,7 @@
     {
       "id": "breakfast",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "answer",
       "sources": [
         {
@@ -169,7 +168,7 @@
         "evidence": [
           {
             "id": "breakfast",
-            "lexicalScore": 4.317676761720474,
+            "lexicalScore": 6.590571013190245,
             "semanticScore": 0.8483757897365094,
             "rerankScore": 0,
             "graph": {
@@ -184,7 +183,7 @@
     {
       "id": "missing-knowledge",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "fallback",
       "sources": [],
       "answer": "I don’t have a reliable answer to that in the hotel information. Please ask the front desk for confirmation."
@@ -213,10 +212,10 @@
     {
       "id": "availability-missing",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "availability-needed",
       "sources": [],
-      "answer": "I can check that for you. Choose your dates and number of guests in the stay planner."
+      "answer": "I can prepare that for you. Tell me your arrival date, your departure date or number of nights, how many guests are staying. You can reply in one sentence, such as “5–7 October for three guests”."
     },
     {
       "id": "availability-complete",
@@ -224,7 +223,7 @@
       "durationMs": 1,
       "type": "availability",
       "sources": [],
-      "answer": "I found 2 room types for your stay. These are sample availability results, not a live booking guarantee."
+      "answer": "I found 2 matching room types, sorted by the lowest sample nightly rate. Compare the details, then choose a room to review your stay. These are demonstration results, not live offers."
     },
     {
       "id": "invalid-dates",
@@ -237,7 +236,7 @@
     {
       "id": "graph-follow-up",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "answer",
       "sources": [
         {
@@ -273,7 +272,7 @@
         "evidence": [
           {
             "id": "breakfast",
-            "lexicalScore": 5.427517529390341,
+            "lexicalScore": 8.846171030042962,
             "semanticScore": 0.6027962867863103,
             "rerankScore": 0,
             "graph": {
@@ -283,7 +282,7 @@
           },
           {
             "id": "terrace",
-            "lexicalScore": 4.929100604225156,
+            "lexicalScore": 8.06909845298801,
             "semanticScore": 0.32120803721981056,
             "rerankScore": 0
           }
@@ -323,7 +322,7 @@
         "evidence": [
           {
             "id": "parking",
-            "lexicalScore": 6.1143459745343245,
+            "lexicalScore": 7.416745785636067,
             "semanticScore": 0.8451542547285167,
             "rerankScore": 0
           }
@@ -334,7 +333,7 @@
     {
       "id": "multi-topic",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "answer",
       "sources": [
         {
@@ -369,7 +368,7 @@
         "evidence": [
           {
             "id": "breakfast",
-            "lexicalScore": 1.761658937862747,
+            "lexicalScore": 2.9088157209169907,
             "semanticScore": 0.6238502938920436,
             "rerankScore": 0,
             "graph": {
@@ -379,7 +378,7 @@
           },
           {
             "id": "parking",
-            "lexicalScore": 4.099152659332466,
+            "lexicalScore": 5.158003109869606,
             "semanticScore": 0.5303300858899107,
             "rerankScore": 0
           }
@@ -390,7 +389,7 @@
     {
       "id": "policy",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "answer",
       "sources": [
         {
@@ -419,7 +418,7 @@
         "evidence": [
           {
             "id": "cancellation",
-            "lexicalScore": 7.063238748050809,
+            "lexicalScore": 10.65135303223597,
             "semanticScore": 0.8764598212022147,
             "rerankScore": 0
           }
@@ -430,7 +429,7 @@
     {
       "id": "unrelated",
       "passed": true,
-      "durationMs": 0,
+      "durationMs": 1,
       "type": "fallback",
       "sources": [],
       "answer": "I don’t have a reliable answer to that in the hotel information. Please ask the front desk for confirmation."

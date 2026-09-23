@@ -5,6 +5,20 @@ import { answerQuestion, checkAvailability, isAvailabilityIntent, retrieve, vali
 const now = new Date('2026-10-01T12:00:00Z');
 const config = { now, logger:{warn(){}} };
 
+test('assistant introduces itself without treating identity as a hotel fact', async () => {
+  const result = await answerQuestion({question:'Who are you?'}, config);
+  assert.equal(result.type,'answer');
+  assert.match(result.answer,/Simplotel Guest Concierge/);
+  assert.match(result.answer,/demonstration/);
+});
+
+test('numbered-room request explains that inventory is by category', async () => {
+  const result = await answerQuestion({question:'Room 120 available?'}, config);
+  assert.equal(result.type,'availability-needed');
+  assert.match(result.answer,/can’t confirm individual room 120/);
+  assert.equal(result.availability,undefined);
+});
+
 test('check-in question returns the sourced time', async () => {
   const result = await answerQuestion({question:'What time is check-in?'}, config);
   assert.equal(result.type,'answer'); assert.match(result.answer,/3:00 PM/); assert.ok(result.sources.some((source) => source.id === 'arrival'));

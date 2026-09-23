@@ -1,0 +1,22 @@
+.hotel-contact-trigger{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:0;border:0;background:transparent;color:#426d5c;font:600 11px 'DM Sans',sans-serif;white-space:nowrap}
+.contact-property{padding:8px 0 22px}
+.contact-property>span{font-size:9px;letter-spacing:.2em;color:#a08660;font-weight:700}
+.contact-property h3{font:500 38px/1.05 'Cormorant Garamond',Georgia,serif;margin:15px 0 12px}
+.contact-property>p{font-size:12px;color:#708270;margin:0}
+.contact-disclosure{display:flex;gap:10px;align-items:flex-start;padding:14px;background:#edf2e5;border:1px solid #dce4d1;border-radius:7px}
+.contact-disclosure>svg{flex:none;margin-top:2px;color:#69815e}
+.contact-disclosure p{font-size:11px;line-height:1.65;margin:0;color:#62745d}
+.contact-list{margin-block:8px 20px}
+.contact-list section{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid #e1e6d8;align-items:flex-start}
+.contact-list section>svg{flex:none;color:#ac936d;margin-top:4px}
+.contact-list section>div{min-width:0}
+.contact-list h3{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;margin:0 0 8px}
+.contact-list small{font-size:8px;color:#8c846b;font-weight:500;letter-spacing:.12em}
+.contact-list p{font-size:15px;margin:0 0 9px;line-height:1.5;overflow-wrap:anywhere}
+.contact-list button,.contact-list a{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;color:#537661;padding:5px 0;min-height:32px;font-size:11px}
+.contact-map{display:flex;gap:12px;align-items:center;border:1px solid #d6e0cd;border-radius:7px;padding:16px;background:#f1f4e9;color:#305c48;text-decoration:none;font-size:12px;font-weight:600}
+.contact-map span{flex:1}.contact-map small{display:block;font-size:10px;color:#7b8975;font-weight:400;margin-top:5px}
+.contact-copy-status{min-height:15px;font-size:11px;color:#5e7d5d;margin:10px 0 0}
+.contact-hours{font-size:10px;color:#72836d}
+.contact-answer-action{margin-top:12px;padding:10px 13px;min-height:40px;display:flex;align-items:center;gap:8px;border:1px solid #d3dfcb;border-radius:5px;background:#f6f8ef;color:#355f4e;font-size:11px;font-weight:600}
+@media(max-width:760px){.hotel-contact-trigger{font-size:10px}.contact-property h3{font-size:33px}.contact-list p{font-size:14px}.contact-disclosure p{font-size:10px}}

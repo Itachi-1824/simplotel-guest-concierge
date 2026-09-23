@@ -1,0 +1,84 @@
+{
+  "target": "public HTTPS deployment",
+  "total": 13,
+  "results": [
+    {
+      "name": "Exact initial request: dates and two guests",
+      "passed": true,
+      "status": 200,
+      "durationMs": 6498
+    },
+    {
+      "name": "Exact shorthand correction",
+      "passed": true,
+      "status": 200,
+      "durationMs": 5688
+    },
+    {
+      "name": "Exact guest correction, not a cot question",
+      "passed": true,
+      "status": 200,
+      "durationMs": 6744
+    },
+    {
+      "name": "Single-digit guest reply",
+      "passed": true,
+      "status": 200,
+      "durationMs": 4808
+    },
+    {
+      "name": "Breakfast preference update",
+      "passed": true,
+      "status": 200,
+      "durationMs": 4745
+    },
+    {
+      "name": "Remove breakfast requirement",
+      "passed": true,
+      "status": 200,
+      "durationMs": 5331
+    },
+    {
+      "name": "Invalid guest correction stays unbooked",
+      "passed": true,
+      "status": 200,
+      "durationMs": 5040
+    },
+    {
+      "name": "Sold-out dates offer nearby stays",
+      "passed": true,
+      "status": 200,
+      "durationMs": 5487
+    },
+    {
+      "name": "Exact anything-available follow-up",
+      "passed": true,
+      "status": 200,
+      "durationMs": 4984
+    },
+    {
+      "name": "Alternative dates revalidate in the stay report",
+      "passed": true,
+      "status": 200,
+      "durationMs": 296
+    },
+    {
+      "name": "Parking topic remains a hotel question",
+      "passed": true,
+      "status": 200,
+      "durationMs": 10231
+    },
+    {
+      "name": "Malformed booking context rejected",
+      "passed": true,
+      "status": 400,
+      "durationMs": 291
+    },
+    {
+      "name": "Invalid contextual preference rejected",
+      "passed": true,
+      "status": 400,
+      "durationMs": 862
+    }
+  ]
+}

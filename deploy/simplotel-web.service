@@ -1,0 +1,26 @@
+[Unit]
+Description=Simplotel Guest Concierge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=simplotel
+WorkingDirectory=/srv/simplotel/app
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=4325
+Environment=TRUST_CLOUDFLARE=1
+Environment=LOCAL_AI_URL=http://127.0.0.1:8005
+EnvironmentFile=-/srv/simplotel/app/.env
+ExecStart=/srv/simplotel/runtime/node_modules/node/bin/node scripts/start.mjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/srv/simplotel/app/.astro /srv/simplotel/app/.cache
+
+[Install]
+WantedBy=multi-user.target

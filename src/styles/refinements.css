@@ -1,6 +1,14 @@
 
 html,body{height:100%;overflow:hidden;scroll-snap-type:none}
-.app-shell{height:var(--app-height,100dvh);min-height:0;overflow:hidden}
+.chat-avatar{background:transparent;border:0;border-radius:0;box-shadow:none;width:48px;height:52px}
+.chat-avatar::before{display:none}
+.chat-avatar img{display:block;width:100%;height:100%;object-fit:contain}
+.avatar{background:transparent;border:0;border-radius:0}
+.avatar img{display:block;width:24px;height:26px;object-fit:contain}
+.chat-persona h2,.welcome-copy h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.025em}
+.tour-button{display:flex;width:auto;padding:0 12px;gap:6px;border-radius:99px;font-size:11px;font-weight:700}
+.mobile-guide-button{display:none}
+.app-shell{position:fixed;inset:0;width:100%;height:var(--app-height,100dvh);min-height:0;overflow:clip}
 .journey{display:flex;flex-direction:column;height:100%;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-y:contain}
 .journey::-webkit-scrollbar{display:none}
 .landing-scene{order:0;height:100%;min-height:0;flex:0 0 100%;display:flex;flex-direction:column;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden}
@@ -81,9 +89,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid #ac8
  .chat-persona .mini-label{font-size:6px;letter-spacing:.12em}
  .history-trigger{width:36px;height:36px}
  .tour-button{display:none}
+ .mobile-guide-button{display:flex;align-items:center;justify-content:center;gap:5px;min-height:40px;padding:0 7px;border:0;background:transparent;color:#315f51;font-size:10px;font-weight:700;white-space:nowrap}
+ .chat-context{gap:10px;flex:none}
+ .chat-context a{white-space:nowrap}
+ .chat-divider>span:first-child{min-width:0;flex:1}
  .mobile-stay-button{font-size:10px;padding:9px 10px;min-height:36px}
  .sound-button{width:30px;height:34px}
- .chat-divider{padding:8px 16px;font-size:9px}
+ .chat-divider{padding:3px 16px;font-size:9px}
  .chat-context a{font-size:9px}
  .private-label{display:none}
  .conversation{padding:18px 18px 20px;gap:18px}
@@ -130,3 +142,4 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid #ac8
 @media(max-height:780px) and (max-width:760px){.welcome-visual{display:none}.conversation.is-empty{padding-top:15px;padding-bottom:15px}.welcome-copy h3{font-size:29px}.welcome-copy>p{margin-bottom:12px}.welcome-actions button{padding-block:9px}.hero h1{font-size:clamp(29px,7vw,41px)}.hero p{font-size:12px;line-height:1.5}.hero-content{padding-block:14px}.eyebrow{font-size:8px}.hero-ask-form>span{display:none}}
 @media(max-height:540px){.online-label,.welcome-copy>p,.welcome-note,.welcome-visual,.composer-footer{display:none}.chat-header{padding-block:6px}.chat-persona h2{font-size:22px}.welcome-copy h3{font-size:25px}.welcome-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:none}.welcome-actions button{border:1px solid #dfe7dc;border-radius:4px;padding:10px!important}.welcome-actions small,.welcome-actions button>svg,.welcome-action-icon{display:none}.concierge-welcome{display:block}.hero-content{padding-block:10px}.hero h1{font-size:29px;margin-block:8px}.hero p{font-size:11px;margin-bottom:10px}.landing-scene .site-header{height:54px;flex-basis:54px}.landing-scene .intro-strip{height:35px;min-height:35px;flex-basis:35px}}
 @media(prefers-reduced-motion:reduce){.journey{scroll-behavior:auto}}
+.nearby-stays{margin-top:18px}.nearby-stays h4{font-size:12px;color:#46695d;margin:0 0 10px}.nearby-stay{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 0;border-top:1px solid #dce5da}.nearby-stay strong{display:block;font-size:13px;color:#274e43}.nearby-stay span{display:block;font-size:12px;color:#687e72;margin-top:5px}.nearby-stay button{display:flex;align-items:center;gap:8px;min-height:44px;padding:10px 12px;border:1px solid #cbd9cc;border-radius:5px;color:#28574b;background:#f2f6ee;font-size:12px;white-space:nowrap}.nearby-stay button:hover{background:#e2ecdf}.nearby-stay button:focus-visible{outline:2px solid #28574b;outline-offset:3px}@media(max-width:540px){.nearby-stay{align-items:stretch;flex-direction:column;gap:9px}.nearby-stay button{justify-content:center}}

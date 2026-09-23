@@ -1,0 +1,213 @@
+{
+  "note": "Fresh real-model requests after chronological-state update; effective application preferences checked independently of raw choices.",
+  "results": [
+    {
+      "id": "remove-after-long-context",
+      "history": [
+        {
+          "role": "user",
+          "content": "Book a room with a sea view and breakfast included. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. "
+        }
+      ],
+      "question": "Actually any view is fine and no breakfast needed.",
+      "expected": {
+        "view": "any",
+        "breakfastIncluded": false
+      },
+      "inputLength": 1143,
+      "data": {
+        "view": {
+          "type": "choice",
+          "choice": "sea",
+          "probabilities": {
+            "sea": 0.7592,
+            "terrace": 0.06,
+            "unspecified": 0.1808
+          },
+          "confidence": 0.3746,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "breakfast": {
+          "type": "choice",
+          "choice": "included",
+          "probabilities": {
+            "included": 0.6097,
+            "unspecified": 0.3903
+          },
+          "confidence": 0.035,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "classifier": "convaiinnovations/laya",
+        "role": "Local classifier, not an LLM"
+      },
+      "effective": {
+        "nightlyBudget": null,
+        "view": "any",
+        "breakfastIncluded": false,
+        "roomId": null
+      },
+      "durationMs": 3722,
+      "passed": true
+    },
+    {
+      "id": "require-after-long-context",
+      "history": [
+        {
+          "role": "user",
+          "content": "Any view is fine. No breakfast needed. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. We are planning a holiday at the hotel. "
+        }
+      ],
+      "question": "Now I need a sea view with breakfast included.",
+      "expected": {
+        "view": "sea",
+        "breakfastIncluded": true
+      },
+      "inputLength": 1126,
+      "data": {
+        "view": {
+          "type": "choice",
+          "choice": "sea",
+          "probabilities": {
+            "sea": 0.4127,
+            "terrace": 0.1847,
+            "unspecified": 0.4026
+          },
+          "confidence": 0.0502,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "breakfast": {
+          "type": "choice",
+          "choice": "unspecified",
+          "probabilities": {
+            "included": 0.2569,
+            "unspecified": 0.7431
+          },
+          "confidence": 0.178,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "classifier": "convaiinnovations/laya",
+        "role": "Local classifier, not an LLM"
+      },
+      "effective": {
+        "nightlyBudget": null,
+        "view": "sea",
+        "breakfastIncluded": true,
+        "roomId": null
+      },
+      "durationMs": 3659,
+      "passed": true
+    },
+    {
+      "id": "latest-private-terrace",
+      "history": [
+        {
+          "role": "user",
+          "content": "I want a sea view."
+        }
+      ],
+      "question": "Change it to a private terrace instead.",
+      "expected": {
+        "view": "terrace",
+        "breakfastIncluded": false
+      },
+      "inputLength": 58,
+      "data": {
+        "view": {
+          "type": "choice",
+          "choice": "terrace",
+          "probabilities": {
+            "sea": 0.4253,
+            "terrace": 0.4775,
+            "unspecified": 0.0972
+          },
+          "confidence": 0.1415,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "breakfast": {
+          "type": "choice",
+          "choice": "unspecified",
+          "probabilities": {
+            "included": 0.2962,
+            "unspecified": 0.7038
+          },
+          "confidence": 0.1234,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "classifier": "convaiinnovations/laya",
+        "role": "Local classifier, not an LLM"
+      },
+      "effective": {
+        "nightlyBudget": null,
+        "view": "terrace",
+        "breakfastIncluded": false,
+        "roomId": null
+      },
+      "durationMs": 1152,
+      "passed": true
+    },
+    {
+      "id": "meal-correction",
+      "history": [
+        {
+          "role": "user",
+          "content": "Book a room with breakfast included."
+        }
+      ],
+      "question": "Actually no breakfast needed.",
+      "expected": {
+        "view": "any",
+        "breakfastIncluded": false
+      },
+      "inputLength": 66,
+      "data": {
+        "view": {
+          "type": "choice",
+          "choice": "unspecified",
+          "probabilities": {
+            "sea": 0.1175,
+            "terrace": 0.1047,
+            "unspecified": 0.7778
+          },
+          "confidence": 0.378,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "breakfast": {
+          "type": "choice",
+          "choice": "included",
+          "probabilities": {
+            "included": 0.7677,
+            "unspecified": 0.2323
+          },
+          "confidence": 0.218,
+          "action": {
+            "act_probability": 1
+          }
+        },
+        "classifier": "convaiinnovations/laya",
+        "role": "Local classifier, not an LLM"
+      },
+      "effective": {
+        "nightlyBudget": null,
+        "view": "any",
+        "breakfastIncluded": false,
+        "roomId": null
+      },
+      "durationMs": 1217,
+      "passed": true
+    }
+  ]
+}

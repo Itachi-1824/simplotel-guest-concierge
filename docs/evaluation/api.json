@@ -1,61 +1,96 @@
 {
-  "date": "2026-09-23T15:31:47.204Z",
-  "base": "http://localhost:4322",
-  "total": 9,
+  "base": "https://simplotel.itachi1824.org",
+  "total": 15,
   "results": [
     {
       "name": "Question reaches the backend",
       "status": 200,
       "passed": true,
-      "durationMs": 58
+      "durationMs": 14015
     },
     {
       "name": "Follow-up context",
       "status": 200,
       "passed": true,
-      "durationMs": 7
+      "durationMs": 15017
     },
     {
       "name": "Availability tool",
       "status": 200,
       "passed": true,
-      "durationMs": 2
+      "durationMs": 1203
     },
     {
       "name": "Unknown answer",
       "status": 200,
       "passed": true,
-      "durationMs": 6
+      "durationMs": 14976
     },
     {
       "name": "Malformed JSON",
       "status": 400,
       "passed": true,
-      "durationMs": 3
+      "durationMs": 307
     },
     {
       "name": "Short question",
       "status": 400,
       "passed": true,
-      "durationMs": 2
+      "durationMs": 851
     },
     {
       "name": "Invalid history",
       "status": 400,
       "passed": true,
-      "durationMs": 1
+      "durationMs": 296
     },
     {
       "name": "Invalid stay",
       "status": 400,
       "passed": true,
-      "durationMs": 3
+      "durationMs": 295
     },
     {
       "name": "Oversized request",
       "status": 413,
       "passed": true,
-      "durationMs": 2
+      "durationMs": 397
+    },
+    {
+      "name": "Invalid room preference",
+      "status": 400,
+      "passed": true,
+      "durationMs": 280
+    },
+    {
+      "name": "Budget mismatch",
+      "status": 200,
+      "passed": true,
+      "durationMs": 289
+    },
+    {
+      "name": "Chat prepares an autonomous stay review",
+      "status": 200,
+      "passed": true,
+      "durationMs": 6949
+    },
+    {
+      "name": "Missing essentials are requested together",
+      "status": 200,
+      "passed": true,
+      "durationMs": 5684
+    },
+    {
+      "name": "Quote recomputes price",
+      "status": 200,
+      "passed": true,
+      "durationMs": 300
+    },
+    {
+      "name": "Invalid quoted room",
+      "status": 400,
+      "passed": true,
+      "durationMs": 303
     }
   ]
 }

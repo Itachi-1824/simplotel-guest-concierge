@@ -1,0 +1,27 @@
+[Unit]
+Description=Simplotel local retrieval and classifier
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=simplotel
+WorkingDirectory=/srv/simplotel/app
+Environment=MODEL_CPU_THREADS=2
+Environment=OMP_NUM_THREADS=2
+Environment=LAYA_ENABLED=1
+Environment=LAYA_DEVICE=cpu
+Environment=HF_HOME=/srv/simplotel/app/.cache/huggingface
+Environment=XDG_CACHE_HOME=/srv/simplotel/app/.cache
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/srv/simplotel/app/.venv/bin/python -m uvicorn model_service.app:app --host 127.0.0.1 --port 8005
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/srv/simplotel/app/.cache
+
+[Install]
+WantedBy=multi-user.target

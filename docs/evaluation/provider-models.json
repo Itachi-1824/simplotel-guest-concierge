@@ -1,0 +1,161 @@
+{
+  "provider": "Pollinations",
+  "method": "Three identical hotel evidence-selection tasks per model, up to three concurrent requests. Validated source IDs, complete sentences, and required facts. Small sample; not a general model ranking.",
+  "maxTokens": 1200,
+  "timeoutMs": 20000,
+  "selected": "mistralai/mistral-large-3",
+  "summaries": [
+    {
+      "model": "mistralai/mistral-large-3",
+      "passed": 3,
+      "total": 3,
+      "medianMs": 4638,
+      "maxMs": 5658
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "passed": 3,
+      "total": 3,
+      "medianMs": 4937,
+      "maxMs": 5414
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "passed": 3,
+      "total": 3,
+      "medianMs": 5694,
+      "maxMs": 6221
+    },
+    {
+      "model": "openai/gpt-5-nano",
+      "passed": 3,
+      "total": 3,
+      "medianMs": 9896,
+      "maxMs": 10661
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning",
+      "passed": 1,
+      "total": 3,
+      "medianMs": 8156,
+      "maxMs": 8613
+    }
+  ],
+  "results": [
+    {
+      "model": "openai/gpt-5.4-nano",
+      "case": "parking-cancellation",
+      "passed": true,
+      "durationMs": 4937,
+      "answer": "Valet parking is available for €28 per night.\n\nFlexible reservations may be cancelled without charge until 6:00 PM local time, 48 hours before arrival."
+    },
+    {
+      "model": "mistralai/mistral-large-3",
+      "case": "parking-cancellation",
+      "passed": true,
+      "durationMs": 5658,
+      "answer": "Valet parking is available for €28 per night.\n\nFlexible reservations may be cancelled without charge until 6:00 PM local time, 48 hours before arrival."
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning",
+      "case": "parking-cancellation",
+      "passed": false,
+      "durationMs": 8156,
+      "error": "Model response exceeded its token allowance",
+      "missing": [
+        "€28",
+        "48 hours",
+        "6:00 PM"
+      ]
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "case": "parking-cancellation",
+      "passed": true,
+      "durationMs": 5694,
+      "answer": "Valet parking is available for €28 per night.\n\nFlexible reservations may be cancelled without charge until 6:00 PM local time, 48 hours before arrival."
+    },
+    {
+      "model": "openai/gpt-5-nano",
+      "case": "parking-cancellation",
+      "passed": true,
+      "durationMs": 10661,
+      "answer": "Valet parking is available for €28 per night.\n\nFlexible reservations may be cancelled without charge until 6:00 PM local time, 48 hours before arrival."
+    },
+    {
+      "model": "mistralai/mistral-large-3",
+      "case": "breakfast-pool",
+      "passed": true,
+      "durationMs": 4638,
+      "answer": "For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day.\n\nThe outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM."
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "case": "breakfast-pool",
+      "passed": true,
+      "durationMs": 5414,
+      "answer": "For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day.\n\nThe outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM."
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning",
+      "case": "breakfast-pool",
+      "passed": false,
+      "durationMs": 8613,
+      "error": "Model response exceeded its token allowance",
+      "missing": [
+        "Classic Room",
+        "€24",
+        "8:00 PM"
+      ]
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "case": "breakfast-pool",
+      "passed": true,
+      "durationMs": 6221,
+      "answer": "For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day.\n\nThe outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM."
+    },
+    {
+      "model": "openai/gpt-5-nano",
+      "case": "breakfast-pool",
+      "passed": true,
+      "durationMs": 9896,
+      "answer": "For the Classic Room and Sea View Room, breakfast is available for €24 per adult per day.\n\nThe outdoor sea-view pool is open daily from 7:00 AM to 8:00 PM."
+    },
+    {
+      "model": "mistralai/mistral-large-3",
+      "case": "terrace-wifi",
+      "passed": true,
+      "durationMs": 4165,
+      "answer": "The Terrace Suite sleeps up to 3 guests with a king bed and sofa bed.\n\nComplimentary Wi-Fi is available throughout the hotel and in all rooms."
+    },
+    {
+      "model": "openai/gpt-5.4-nano",
+      "case": "terrace-wifi",
+      "passed": true,
+      "durationMs": 4770,
+      "answer": "The Terrace Suite sleeps up to 3 guests with a king bed and sofa bed.\n\nComplimentary Wi-Fi is available throughout the hotel and in all rooms."
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning",
+      "case": "terrace-wifi",
+      "passed": true,
+      "durationMs": 6928,
+      "answer": "The Terrace Suite sleeps up to 3 guests with a king bed and sofa bed.\n\nComplimentary Wi-Fi is available throughout the hotel and in all rooms."
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "case": "terrace-wifi",
+      "passed": true,
+      "durationMs": 5416,
+      "answer": "The Terrace Suite sleeps up to 3 guests with a king bed and sofa bed.\n\nComplimentary Wi-Fi is available throughout the hotel and in all rooms."
+    },
+    {
+      "model": "openai/gpt-5-nano",
+      "case": "terrace-wifi",
+      "passed": true,
+      "durationMs": 9584,
+      "answer": "The Terrace Suite sleeps up to 3 guests with a king bed and sofa bed.\n\nComplimentary Wi-Fi is available throughout the hotel and in all rooms."
+    }
+  ]
+}

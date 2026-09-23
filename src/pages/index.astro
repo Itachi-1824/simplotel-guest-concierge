@@ -1,5 +1,6 @@
 ---
 import GuestExperience from '../components/GuestExperience.jsx';
+import hotelData from '../../data/hotel.json';
 ---
 <!doctype html>
 <html lang="en">
@@ -12,9 +13,9 @@ import GuestExperience from '../components/GuestExperience.jsx';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <GuestExperience client:load />
+    <GuestExperience hotel={hotelData.hotel} client:load />
   </body>
 </html>

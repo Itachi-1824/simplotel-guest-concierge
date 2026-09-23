@@ -1,0 +1,73 @@
+{
+  "source": "docs/evaluation/laya-stress-before.json",
+  "method": "Fit a positive scalar by development-set negative log likelihood on log emitted probabilities. This is an extra temperature on top of the checkpoint temperature, not a raw-logit refit. Check NLL, multiclass Brier sum, and 10-bin ECE on the separate holdout.",
+  "scope": "20 development and 20 held-out English cases per head. Exploratory; too small to establish general calibration. No model weights changed.",
+  "applied": false,
+  "reason": "No fit improved all held-out metrics. Keep the existing checkpoint temperatures and the validated application acceptance policy.",
+  "heads": {
+    "view": {
+      "relativeTemperature": 0.8297934537187803,
+      "developmentBefore": {
+        "nll": 0.5955838910270773,
+        "brier": 0.3437661914300659,
+        "ece": 0.09930809995903099,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "developmentAfter": {
+        "nll": 0.5862853634537444,
+        "brier": 0.34455213850512345,
+        "ece": 0.19345838382738006,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "heldOutBefore": {
+        "nll": 0.6129939648957261,
+        "brier": 0.3549035297000009,
+        "ece": 0.06357679127261792,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "heldOutAfter": {
+        "nll": 0.6089859526929401,
+        "brier": 0.35608398252531287,
+        "ece": 0.12982711085357157,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "eligible": false
+    },
+    "breakfast": {
+      "relativeTemperature": 1.1994164595097452,
+      "developmentBefore": {
+        "nll": 0.5787885202656972,
+        "brier": 0.3934946,
+        "ece": 0.16638999999999998,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "developmentAfter": {
+        "nll": 0.5757256404893437,
+        "brier": 0.3923147158646959,
+        "ece": 0.11516798238195883,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "heldOutBefore": {
+        "nll": 0.5781522178021353,
+        "brier": 0.390507458,
+        "ece": 0.13181000000000004,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "heldOutAfter": {
+        "nll": 0.5760232490882389,
+        "brier": 0.3905725668666136,
+        "ece": 0.21434142365795808,
+        "accuracy": 0.75,
+        "count": 20
+      },
+      "eligible": false
+    }
+  }
+}
