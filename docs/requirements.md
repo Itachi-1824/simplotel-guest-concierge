@@ -34,7 +34,7 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Conversation context | `query-plan.mjs`: follow-up entities, topics, stay slots |
 | Structured responses | Response types documented in `api.md` |
 | Validation, errors and logging | Body/history limits, HTTP errors, type and duration logs |
-| Meaningful automated tests | 26 Node tests, three Python signal tests, nine HTTP scenarios |
+| Meaningful automated tests | 27 Node tests, three Python signal tests, nine HTTP scenarios |
 
 ## Integration and evaluation
 

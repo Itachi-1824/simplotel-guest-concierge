@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Archive, ArchiveRestore, ChevronDown, Download, Folder, FolderPlus, MessageSquarePlus, Pencil, Plus, RotateCcw, Search, Trash2, X } from 'lucide-react';
+import { exportTranscript } from '../lib/sessions.mjs';
 
 export default function SessionDrawer({ open, close, sessions, folders, activeId, busy, newSession, selectSession, renameSession, archiveSession, deleteSession, moveSession, addFolder, renameFolder, deleteFolder, startTour }) {
   const [view, setView] = useState('all');
@@ -13,7 +14,7 @@ export default function SessionDrawer({ open, close, sessions, folders, activeId
   const [folderError, setFolderError] = useState('');
   const matches = (session) => `${session.title} ${session.messages.map((message) => message.content).join(' ')}`.toLowerCase().includes(search.toLowerCase().trim());
   const exportSession = (session) => {
-    const text = `# ${session.title}\n\n${session.messages.map((message) => `## ${message.role === 'user' ? 'You' : 'Simplotel concierge'}\n\n${message.content}`).join('\n\n')}\n\nExported from Simplotel Guest Concierge. Illustrative hotel information.`;
+    const text = exportTranscript(session);
     const url = URL.createObjectURL(new Blob([text], {type:'text/markdown;charset=utf-8'}));
     const link = document.createElement('a'); link.href = url; link.download = `${session.title.replace(/[^a-z0-9]+/gi,'-').slice(0,50) || 'conversation'}.md`; link.click();
     setTimeout(() => URL.revokeObjectURL(url),1000);

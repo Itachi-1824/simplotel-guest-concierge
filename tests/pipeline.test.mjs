@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {answerQuestion,hotel,evidenceSentences,retrieve} from '../src/lib/assistant.mjs';
 import {planQuery,resolveStay} from '../src/lib/query-plan.mjs';
-import {autoTitle,createSession,loadSavedSessions} from '../src/lib/sessions.mjs';
+import {autoTitle,createSession,loadSavedSessions,exportTranscript} from '../src/lib/sessions.mjs';
 import graph from '../data/knowledge-graph.json' with {type:'json'};
 const config={now:new Date('2026-10-01'),trace:true,logger:{warn(){}}};
 
@@ -73,4 +73,8 @@ test('corrupt saved state resets safely; missing folder becomes unfiled',()=>{
   const loaded=loadSavedSessions(JSON.stringify({sessions:[saved],folders:[]}),welcome);
   assert.equal(loaded.sessions[0].folderId,null);assert.equal(loaded.activeId,'test');
   assert.ok(autoTitle('a'.repeat(100)).length<=38);
+});
+test('transcript export includes availability cards and their totals',()=>{
+  const text=exportTranscript({title:'Italy trip',messages:[{role:'assistant',content:'One room found.',availability:{checkIn:'2026-10-05',checkOut:'2026-10-07',adults:3,nights:2,rooms:[{name:'Terrace Suite',total:780,basePrice:390,capacity:3,available:1}]}}]});
+  assert.match(text,/Terrace Suite: €780 total/);assert.match(text,/2026-10-05 to 2026-10-07/);assert.match(text,/No reservation is made/);
 });

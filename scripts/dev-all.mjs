@@ -9,8 +9,8 @@ if (!existsSync(python)) {
   process.exit(1);
 }
 const children = [
-  spawn(python, ['-m','uvicorn','model_service.app:app','--host','127.0.0.1','--port','8001'], {stdio:'inherit',env:{...process.env,USE_TF:'0'}}),
-  spawn(process.execPath, ['node_modules/astro/astro.js','dev','--host','0.0.0.0'], {stdio:'inherit',env:{...process.env,LOCAL_AI_URL:'http://127.0.0.1:8001'}})
+  spawn(python, ['-m','uvicorn','model_service.app:app','--host','127.0.0.1','--port','8001'], {stdio:'inherit',env:{...process.env,USE_TF:'0',PYTHONUTF8:'1'}}),
+  spawn(process.execPath, ['node_modules/astro/bin/astro.mjs','dev','--host','0.0.0.0'], {stdio:'inherit',env:{...process.env,LOCAL_AI_URL:'http://127.0.0.1:8001'}})
 ];
 const stop = () => { for (const child of children) if (!child.killed) child.kill(); };
 process.on('SIGINT',stop); process.on('SIGTERM',stop);

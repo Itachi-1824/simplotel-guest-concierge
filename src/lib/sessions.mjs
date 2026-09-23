@@ -7,6 +7,21 @@ export function autoTitle(question) {
   return clean.length > 38 ? `${clean.slice(0, 37).trimEnd()}…` : clean;
 }
 
+export function exportTranscript(session) {
+  const messages = session.messages.map((message) => {
+    let text = `## ${message.role === 'user' ? 'You' : 'Simplotel concierge'}\n\n${message.content}`;
+    if (message.availability) {
+      const stay = message.availability;
+      text += `\n\n${stay.checkIn} to ${stay.checkOut} · ${stay.adults} guests · ${stay.nights} nights\n`;
+      text += stay.rooms.map((room) => `\n- ${room.name}: €${room.total} total (€${room.basePrice}/night), up to ${room.capacity} guests; ${room.available} left in sample inventory.`).join('');
+      text += '\n\nIllustrative availability. No reservation is made.';
+    }
+    if (message.sources?.length) text += `\n\nSources: ${[...new Set(message.sources.map((source) => source.topic))].join(', ')}.`;
+    return text;
+  });
+  return `# ${session.title}\n\n${messages.join('\n\n')}\n`;
+}
+
 export function createSession(welcome, id = globalThis.crypto?.randomUUID?.() || `session-${Date.now()}`) {
   const time = new Date().toISOString();
   return { id, title:'New conversation', folderId:null, archived:false, manualTitle:false, createdAt:time, updatedAt:time, messages:[welcome] };

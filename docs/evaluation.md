@@ -6,7 +6,7 @@ Tested on 23 September 2026 with Node 24.13.1, Python 3.12.12, and CPU inference
 
 | Check | Result |
 | --- | --- |
-| Node backend and session tests | 26/26 passed |
+| Node backend and session tests | 27/27 passed |
 | Python classifier-signal tests | 3/3 passed |
 | Baseline answer/tool scenarios | 15/15 passed |
 | Local-model scenarios | 15/16 passed |
@@ -40,6 +40,12 @@ The OpenAI-compatible request/response contract, valid source selection, malform
 | Rename, move, archive, restore, search | Controls updated the saved conversation and folder correctly |
 | Seven-step guide | Completed all steps; folder step opens and highlights the sidebar |
 | Local AI request | Thinking state shown before the sourced room answer |
+| Combined launcher | `npm run dev:ai` starts Astro and the Python service; all three models report loaded |
+| Transcript export | Markdown file downloaded and checked; availability cards covered by a regression test |
+| First visit / replay | Fresh browser origin automatically shows the guide; replay completes all seven steps |
+| Folder create, rename, delete | Deleting the test folder moves its chat back to Unfiled |
+| Delete active conversation | Confirmation removes the test chat and creates a usable fresh conversation |
+| Stop response | Pending request cancels and a stopped-response message appears |
 
 ## Reproduce
 
