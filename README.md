@@ -26,7 +26,7 @@
 
 | For the guest | Behind the scenes |
 | --- | --- |
-| Full-page conversation with source labels | 42 hotel facts and 28 reviewed graph relationships |
+| Full-page conversation with source labels and live Markdown | 42 hotel facts and 28 reviewed graph relationships |
 | Dates and preferences in one message | LLM tool arguments, local classification, validated availability |
 | Automatic stay report before confirmation | Rechecked rates, matching options, clear exclusions |
 | Saved chats, folders, export, and replayable guide | Browser-local persistence; no account required |
@@ -67,38 +67,38 @@ Open **http://localhost:4321**. The complete frontend and backend work without A
 
 ## How the assistant works
 
-**The external LLM is used only for chat interactions:** it interprets guest phrasing into structured requests and selects relevant sentences from trusted hotel evidence. Code validates the interpretation, checks inventory, calculates prices, and prepares the review. The LLM cannot reserve a room or take payment.
+**The external LLM is used only for chat interactions:** it interprets guest phrasing, calls hotel tools, and writes answers using returned evidence. Code validates the tool arguments, checks inventory, calculates prices, and prepares the review. The LLM cannot reserve a room or take payment.
 
 **Laya is a local classifier, not an LLM or a text generator.** It runs on the application’s machine/VPS. Its classification inputs stay in that local inference process; they are not sent to a hosted Laya API.
 
 | Responsibility | Implementation |
 | --- | --- |
-| Free-form booking language and contextual corrections | GPT function calls with typed arguments; local parsing fallback |
+| Free-form booking language and contextual corrections | OpenAI-compatible function calls with typed arguments; local parsing fallback |
 | Hotel-question intent, candidate-query selection | Local Laya, with code fallback |
 | Evidence relevance | Local Laya signal, bounded before ranking |
 | Room view and breakfast preferences | Local Laya classification; validated choices displayed for review |
 | Graph suggestions | Offline Laya proposals; reviewed edges only become active |
-| Find supporting facts | BM25, local MiniLM embeddings, FlashRank, rank fusion, reviewed graph relationships |
-| Chat answer wording | Optional LLM sentence selection; server renders only valid source sentences |
+| Find supporting facts | Direct lookup for validated fact IDs; BM25, local MiniLM, FlashRank, rank fusion and graph retrieval for broader searches |
+| Chat answer wording | Optional LLM writes from tool evidence; sources are attached from actual lookups |
 | Date, guest-count, budget and capacity validation | Ordinary deterministic code |
 | Availability, lowest matching sample rate, totals, quote/report | Ordinary deterministic code |
 | Session controls, folders, guide, contact panel, UI | Ordinary application code |
 
 ### If the LLM fails
 
-Transient provider failures get one retry with a fresh seed and short randomized backoff. Both attempts count toward the provider allowance. Content-filter rejections, invalid requests and authentication errors are not retried. Refused requests receive a polite redirect to hotel help. Known role overrides are excluded from later interpretation history.
+Transient provider failures get one retry with a fresh seed and short randomized backoff. A configured fallback model handles the second attempt and subsequent tool rounds of that answer. Both attempts count toward the provider allowance. Invalid tool output and eligible compatibility errors can also switch to the fallback. Authentication errors and content-filter rejections are not retried. Known role overrides are excluded from later interpretation history.
 
 The application still works: local Laya can classify and help retrieve the right information, while code returns grounded source answers and runs the mock availability/quote tools. Laya does not generate replacement prose or invent missing information. It cannot supply unknown facts, research changing real-world prices, or confirm external live availability. If all local models are unavailable, the built-in BM25/feature-hash retrieval and deterministic tools remain available. Unsupported questions receive a clear fallback; uncertain special requests require hotel confirmation.
 
 ### Data handling
 
-Local classification, embeddings, and reranking run on the VPS. When the external LLM is enabled, **language interpretation sends the current question, active stay/preferences, and up to three recent guest messages to the configured provider**. Answer selection sends the current question and selected hotel excerpts. The entire saved conversation is not sent. Optional provider embeddings are a separate opt-in configuration. API keys remain server-side. The public app uses HTTPS and keeps the model service on loopback. Request logs record outcome and duration rather than message contents.
+Local classification, embeddings, and reranking run on the application's server. When the external LLM agent is enabled, **the current question, active stay/preferences, up to 16 recent user/assistant messages, the hotel topic catalog, and tool results are sent to the configured provider**. The browser trims each history message to 1,200 characters and the combined history to 14 KB. The entire saved conversation is not sent. Optional provider embeddings are a separate configuration. API keys remain server-side. The deployed app uses HTTPS and keeps the model service on loopback. Request logs record outcome and duration rather than message contents.
 
 Chats and folders stay in browser local storage and are not encrypted by the app. The demo collects no card details and uses no real guest records. Local inference keeps classification inputs on your server. Questions sent to an external LLM are subject to that provider’s data policy.
 
 ## Stay planning
 
-Give dates, guests, and preferences in one message. Missing essentials are requested together in chat; the optional form fills automatically. GPT interprets unfamiliar phrasing and corrections; Chrono parses natural dates in hotel-local time. Local Laya classifies room view and breakfast preferences. Code validates every stay, filters the four sample room categories, and selects the lowest matching nightly rate. A server-generated report shows the checks, preferences, alternatives, selection reason, cost, and exclusions before confirmation.
+Give dates, guests, and preferences in one message. Missing essentials are requested together in chat; the optional form fills automatically. The LLM interprets unfamiliar phrasing and corrections; Chrono parses natural dates in hotel-local time. Local Laya classifies room view and breakfast preferences. Code validates every stay, filters the four sample room categories, and selects the lowest matching nightly rate. A server-generated report shows the checks, preferences, alternatives, selection reason, cost, and exclusions before confirmation.
 
 **Laya is a local classifier, not an LLM.** Its choices are bounded hints, never the authority for availability, capacity, dates, or prices. This is also declared in `LAYA_ROLE` in the Node and Python code.
 
@@ -136,15 +136,26 @@ Copy `.env.example` to `.env`, then set:
 OPENAI_API_KEY=your-key
 OPENAI_BASE_URL=https://api.openai.com/v1
 OPENAI_MODEL=gpt-4.1-mini
+CONCIERGE_AGENT_ENABLED=1
 ```
 
-Restart the app. A compatible provider must support `/chat/completions`, function calling, and JSON object responses. GPT calls `prepare_stay`, `search_hotel_information`, `ask_guest`, or `decline_request`. The server validates the arguments and executes the local pipeline. Multi-source answers use a separate constrained sentence-selection call. Single-fact answers and explicit availability requests remain usable without a provider. Unresolved language asks for clarification when interpretation fails.
+Restart the app. A compatible provider must support `/chat/completions`, native function calling, and streaming. The agent can call `prepare_stay` and `search_hotel_information`, inspect their results, and continue if evidence is missing. There is a ceiling of 25 tool calls per answer; the prompt asks for the fewest needed. Independent lookups run together, while stay changes run in order. Ordinary conversation needs no tool. The server validates every tool argument and performs the actual calculations. Answers stream through tool rounds and render as safe Markdown. With the agent disabled, the earlier single-call interpreter and local pipeline remain available.
 
-The live demo uses Pollinations: `OPENAI_BASE_URL=https://gen.pollinations.ai/v1`, `OPENAI_MODEL=openai/gpt-5.4-nano`, `OPENAI_TIMEOUT_MS=12000`, and `OPENAI_MAX_TOKENS=24000`. Supply your own key in `.env`. See the [five-model comparison](docs/evaluation/provider-models.json), which preserves the original benchmark and selection before this switch.
+The tested Pollinations configuration is:
+
+```dotenv
+OPENAI_BASE_URL=https://gen.pollinations.ai/v1
+OPENAI_MODEL=z-ai/glm-5.3-flash
+OPENAI_FALLBACK_MODEL=openai/gpt-5.6-luna
+OPENAI_TIMEOUT_MS=12000
+CONCIERGE_AGENT_ENABLED=1
+```
+
+Supply your own key in `.env` and select models available to that key. See the [streaming and model evaluation](docs/evaluation.md#streaming-and-conversation-update).
 
 `LOCAL_AI_URL` can connect a separately running model service. `LAYA_ENABLED=0` disables Laya while retaining local embeddings and reranking. Optional `npm run embeddings` builds a provider embedding index; local MiniLM requires no provider key.
 
-The live output allowance is 24,000 tokens. This is a ceiling; the constrained evidence-selection response remains short. The provider comparison used 1,200 tokens and remains recorded with its original settings.
+Completion requests omit `max_tokens` and use provider defaults. Known GLM/Luna context limits have a conservative input guard; unknown model limits remain the provider's responsibility. The prompt asks for the shortest complete answer. Tool limits, request size limits, timeouts, and the daily provider allowance bound resource use; output length is not guaranteed by the prompt.
 
 ## Check the submission
 
@@ -164,7 +175,7 @@ npm run test:python
 
 Observed results and known limits are in [Evaluation](docs/evaluation.md). Use [Requirements](docs/requirements.md) to review every PDF requirement. The exploratory local evaluation includes a known unsupported paraphrase and reports it as a failure rather than concealing it.
 
-Current coverage includes **112 Node tests**, **15 general HTTP checks**, **13 booking conversation HTTP checks**, and **16 complex fixture scenarios**. Booking checks cover guest corrections, shorthand dates, saved stay context, nearby dates, and quote validation. The optional `node --env-file=.env scripts/evaluate-language.mjs` makes paid requests for 12 language scenarios. Earlier failed prompt trials and retrieval misses remain in the evaluation reports. A [single adversarial browser journey](docs/evaluation/adversarial-e2e.md) records corrections, policy questions, attempted overrides, reload and payment preview, including the failures found and fixed.
+Current coverage includes **133 Node tests**, **15 general HTTP checks**, **13 booking conversation HTTP checks**, and **16 complex fixture scenarios**. Tests cover guest corrections, shorthand dates, saved context, quotes, parallel tools, the 25-call ceiling, fallback models, interrupted streams, and Markdown safety. The optional `node --env-file=.env scripts/evaluate-language.mjs` makes paid requests for 12 language scenarios against the earlier interpreter. Historical results retain their original settings and failures. A [single adversarial browser journey](docs/evaluation/adversarial-e2e.md) records corrections, policy questions, attempted overrides, reload and payment preview.
 
 ## Production build
 

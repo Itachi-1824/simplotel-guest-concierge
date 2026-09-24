@@ -6,7 +6,7 @@ Tested with Node 24.13.1, Python 3.12.12, and CPU inference.
 
 | Check | Result |
 | --- | --- |
-| Node backend, session, and request-limit tests | 112/112 passed |
+| Node backend, agent, streaming, Markdown, session, and request-limit tests | 133/133 passed |
 | GPT-5.4 Nano language interpretation scenarios | 12/12 passed in the final recorded run |
 | Python classifier-signal tests | 3/3 passed |
 | Baseline answer/tool scenarios | 15/15 passed |
@@ -45,7 +45,7 @@ Mistral Large 3 was initially selected, followed by GPT-5.4 Nano. The current de
 
 After deployment, a real Mistral request completed the full retrieval pipeline in 8.98 seconds with an `llm-extractive` trace and MiniLM, FlashRank, and Laya loaded. The public mobile chat returned sourced breakfast and parking prices, and all nine public API checks passed again. A programming request returned the hotel fallback with `demo: true`.
 
-The system prompt confines selection to the fictional hotel evidence. Regression tests also check unrelated requests, forged conversation instructions, and arbitrary provider text. Only validated sentences from trusted fixtures can be rendered; this does not claim universal jailbreak immunity.
+That version confined sentence selection to fictional hotel evidence. Its regression tests check unrelated requests, forged conversation instructions, and arbitrary provider text. The current agent writes natural answers from tool evidence, so those earlier extractive checks do not establish factuality of its generated prose. Neither version claims universal jailbreak immunity.
 
 ## Browser checks
 
@@ -92,7 +92,7 @@ Four real local preference-classifier probes are recorded in [booking-classifier
 
 ## Expanded sample-data regression checks
 
-The fixture has 42 facts, four room categories, and 28 graph edges. Sixteen data-driven retrieval scenarios cover conditional fees, multiple sources, exceptions, and unavailable guarantees. Further tests check fixture integrity, special-request booking boundaries, and factual follow-ups after availability. At this stage the Node suite had 71 tests; the current suite has 112. These are focused development fixtures, not a claim of production-scale or general reasoning performance.
+The fixture has 42 facts, four room categories, and 28 graph edges. Sixteen data-driven retrieval scenarios cover conditional fees, multiple sources, exceptions, and unavailable guarantees. Further tests check fixture integrity, special-request booking boundaries, and factual follow-ups after availability. At this stage the Node suite had 71 tests; the current suite has 133. These are focused development fixtures, not a claim of production-scale or general reasoning performance.
 
 All 16 expanded retrieval cases also passed on the VPS with MiniLM, FlashRank, and Laya loaded, before the two contact facts were added. [Recorded local-model run](evaluation/complex-local.json). Reproduce with `node scripts/evaluate-complex.mjs --local`; omit `--local` to run the baseline. The evaluation is keyless and does not call the external LLM.
 
@@ -122,4 +122,30 @@ The [single browser journey](evaluation/adversarial-e2e.md) preserved dates, two
 
 The [five-model tool-call check](evaluation/tool-model-comparison.json) used one identical request per model. GLM-5.3 Flash, GPT-5.4 Nano, GPT-5 Nano and Mistral Large 3 returned valid stay tools. Cohere did not. GLM completed the subsequent live final-review request with a valid prepare_stay call in 11.386 seconds end to end. Selection reflects compatibility and user preference, not a claim that it was fastest or generally most accurate.
 
-The suite now has 112 passing Node tests. New cases cover distinct retry seeds, retry exhaustion, rate-limit backoff, provider budgets, no retry on content filters or invalid requests, polite redirection and removal of refused overrides from later interpretation history.
+That version had 112 passing Node tests. Its new cases covered distinct retry seeds, retry exhaustion, rate-limit backoff, provider budgets, no retry on content filters or invalid requests without a backup model, polite redirection and removal of refused overrides from later interpretation history.
+
+## Streaming and conversation update
+
+Follow-up verification on 24 September 2026: **133/133 Node tests, 15/15 baseline scenarios, and 15/15 HTTP API checks passed**. The production build passed and npm reported no dependency vulnerabilities. The HTTP checks ran against a fresh production build on loopback; an additional SSE check verified status followed by a canonical demo result. The 21 added unit tests cover iterative and parallel tools, sequential stay changes, duplicate lookup reuse, the 25-call ceiling, GLM-to-Luna fallback, content-filter handling, context limits, cancellation, interrupted SSE, interleaved tool deltas, plain-text final replies, and Markdown safety. Run `npm test` to repeat these controlled tests without a provider key.
+
+Two integration problems were found: forced JSON mode interfered with GLM's native tool calls, and the final parser rejected ordinary natural-language replies. The agent now requests native tools without JSON mode, streams its answer, and accepts normal final text. Validated exact fact IDs also bypass unnecessary local inference; broader queries still use retrieval.
+
+One public HTTPS `dinner?` check returned initial status at about 220 ms, hotel lookup status at 2.26 s, first answer text at 3.72 s, and its complete sourced answer at 4.52 s, with 111 text events. The connection remained open through the tool round. This is one measured request, not a latency guarantee. Browser checks verified rendered emphasis and lists, existing and streamed messages, and a 390 × 844 layout without horizontal overflow.
+
+Seven Quest-eligible models were also compared over the same five-turn development scenario:
+
+| Model | Automated checks | Mean full response |
+| --- | --- | --- |
+| GLM-5.3 Flash | 5/5 | 5.94 s |
+| GPT-5.6 Luna | 5/5 | 6.29 s |
+| DeepSeek V4.1 Flash | 5/5 | 7.14 s |
+| Nova Micro | 4/5 | 4.98 s |
+| Nemotron 3.5 Lightning | 4/5 | 5.35 s |
+| GPT-OSS 20B | 4/5 | 12.19 s |
+| GPT-5 Nano | 3/5 | 5.88 s |
+
+GLM remains primary and Luna the fallback. Manual review also caught a misleading occupancy implication from Nemotron that the initial automatic check missed. These are small, prompt-dependent observations, not an independent model ranking. The comparison did not configure the local AI service for fuzzy retrieval, unlike production; exact fact lookup followed the production path. Model eligibility and pricing can change.
+
+The provider catalog reported a 1,048,576-token GLM context and a 1,050,000-token Luna context. Luna's documented output maximum was 128,000; the catalog did not publish a GLM output maximum. Requests omit an output limit and use a conservative input budget. These recorded limits should be rechecked when changing provider or model. Sources: [Pollinations model catalog](https://gen.pollinations.ai/text/models?community=false) and [OpenAI models](https://developers.openai.com/api/docs/models).
+
+The natural-language agent can still choose incomplete evidence or phrase a conclusion incorrectly. Tests establish specific behaviours and preserve observed misses; they do not prove that every possible conversation will succeed.

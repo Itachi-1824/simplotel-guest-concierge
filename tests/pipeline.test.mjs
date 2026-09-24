@@ -58,7 +58,7 @@ test('LLM can only select verbatim sentences from supplied sources',async()=>{
     assert.equal(url,'https://example.test/v1/chat/completions');
     const payload=JSON.parse(init.body); const evidence=JSON.parse(payload.messages[1].content).evidence;
     assert.equal(payload.model,'hotel-test-model');
-    assert.equal(payload.max_tokens,24000);
+    assert.equal(payload.max_tokens,undefined);
     assert.match(payload.messages[0].content,/JSON/);
     assert.ok(evidence.length>=2);
     return Response.json({choices:[{message:{content:JSON.stringify({selections:evidence.map(f=>({sourceId:f.id,sentences:[0]}))})}}]});

@@ -1,3 +1,5 @@
+import MessageMarkdown from './MessageMarkdown.mjs';
+import {readEvents} from '../lib/chat-stream.mjs';
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowDown, ArrowRight, ArrowUpRight, BedDouble, CalendarDays, Check, CircleHelp, Clock3, Compass, Copy, HelpCircle, Home, Menu, MessageSquareText, Minus, Moon, Plus, RotateCcw, Send, ShieldCheck, Square, Sun, Volume2, VolumeX, Waves, X } from 'lucide-react';
@@ -50,7 +52,7 @@ function Message({ message, reduceMotion, retry, onReview, onEditStay, onContact
     {!isGuest && <div className="avatar" aria-hidden="true"><img src="/concierge-mark.webp" alt="" width="24" height="26"/></div>}
     <div className="message-body">
       <div className="message-author">{isGuest ? 'You' : 'Simplotel concierge'} {message.createdAt && <span>· {new Date(message.createdAt).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})}</span>}</div>
-      <div className={`bubble ${message.type === 'error' ? 'error-bubble' : ''}`}>{message.content}</div>
+      <div className={`bubble ${message.type === 'error' ? 'error-bubble' : ''}`}>{isGuest ? message.content : <MessageMarkdown text={message.content}/>}</div>
       {message.sources?.length > 0 && <div className="source-line"><ShieldCheck size={13}/> Sample hotel guide: {message.sources.map((source) => source.topic).filter((item,index,array) => array.indexOf(item) === index).join(', ')}</div>}
       {(message.sources?.some(source=>['contact','location'].includes(source.id))||['fallback','clarification'].includes(message.type))&&<button type="button" className="contact-answer-action" onClick={onContact}>Hotel contact & location <ArrowUpRight size={14}/></button>}
       {message.availability && <div className="availability-result">
@@ -60,7 +62,7 @@ function Message({ message, reduceMotion, retry, onReview, onEditStay, onContact
         {message.availability.alternatives?.length>0&&<div className="nearby-stays"><h4>Nearby dates · Same guests & preferences</h4>{message.availability.alternatives.map(option=><div className="nearby-stay" key={`${option.checkIn}-${option.room.id}`}><div><strong>{new Date(`${option.checkIn}T12:00:00Z`).toLocaleDateString('en-GB',{day:'numeric',month:'short'})} – {new Date(`${option.checkOut}T12:00:00Z`).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</strong><span>{option.room.name} · {option.nights} nights · €{option.room.total.toLocaleString()} total</span></div><button type="button" onClick={()=>onReview({roomId:option.room.id,stay:{checkIn:option.checkIn,checkOut:option.checkOut,adults:option.adults},preferences:message.availability.preferences})}>Review these dates <ArrowUpRight size={14}/></button></div>)}</div>}
         <p className="inventory-note">Illustrative rates and inventory · No reservation is made</p>
       </div>}
-      {!isGuest && message.type !== 'welcome' && <div className="message-actions"><button type="button" onClick={copy} aria-label={copied ? 'Answer copied' : 'Copy answer'}>{copied ? <Check size={13}/> : <Copy size={13}/>} {copied ? 'Copied' : 'Copy'}</button>{message.type === 'error' && <button type="button" onClick={retry}><RotateCcw size={13}/> Try again</button>}</div>}
+      {!isGuest && !['welcome','streaming'].includes(message.type) && <div className="message-actions"><button type="button" onClick={copy} aria-label={copied ? 'Answer copied' : 'Copy answer'}>{copied ? <Check size={13}/> : <Copy size={13}/>} {copied ? 'Copied' : 'Copy'}</button>{message.type === 'error' && <button type="button" onClick={retry}><RotateCcw size={13}/> Try again</button>}</div>}
     </div>
   </motion.div>;
 }
@@ -80,6 +82,8 @@ export default function GuestExperience({hotel}) {
   const [question, setQuestion] = useState('');
   const [heroQuestion, setHeroQuestion] = useState('');
   const [loading, setLoading] = useState(false);
+  const [streamingAnswer,setStreamingAnswer] = useState('');
+  const [streamStatus,setStreamStatus] = useState('Thinking about your request…');
   const [error, setError] = useState('');
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
@@ -168,7 +172,7 @@ export default function GuestExperience({hotel}) {
     },1500);
     return () => clearTimeout(timer);
   }, [sessionReady,arrivalReady,activeScene]);
-  useEffect(() => { const conversation = conversationRef.current; if (conversation && (messages.length > 1 || loading)) conversation.scrollTo({top:conversation.scrollHeight,behavior:reduceMotion ? 'instant' : 'smooth'}); }, [messages, loading, reduceMotion]);
+  useEffect(() => { const conversation = conversationRef.current; if (conversation && (messages.length > 1 || loading)) conversation.scrollTo({top:conversation.scrollHeight,behavior:reduceMotion || streamingAnswer ? 'instant' : 'smooth'}); }, [messages, loading, streamingAnswer, reduceMotion]);
   useEffect(() => { const field = questionRef.current; if (field) { field.style.height = 'auto'; field.style.height = `${Math.min(field.scrollHeight,120)}px`; } }, [question]);
   useEffect(() => { if (plannerOpen) plannerCloseRef.current?.focus(); }, [plannerOpen]);
   useEffect(() => {
@@ -249,18 +253,35 @@ export default function GuestExperience({hotel}) {
   const sendQuestion = async (text, stay, preferences) => {
     const value = text.trim();
     if (!value || loading) return;
-    setError(''); setLoading(true); setQuestion(''); play('send');
-    const history = messages.filter((message) => message.id !== 0).map(({role,content}) => ({role,content})).slice(-8);
+    setError(''); setLoading(true); setStreamingAnswer(''); setStreamStatus('Thinking about your request…'); setQuestion(''); play('send');
+    const history = [];
+    let historyBytes = 0;
+    for (const {role,content} of messages.filter(message => message.id !== 0).slice(-16).reverse()) {
+      const turn = {role,content:content.slice(0,1200)};
+      const size = new TextEncoder().encode(JSON.stringify(turn)).length;
+      if (historyBytes + size > 14000) break;
+      history.unshift(turn);
+      historyBytes += size;
+    }
     const lastStay=messages.findLast(message=>message.role==='assistant'&&(message.availability||message.bookingContext));
     const bookingContext=lastStay?.bookingContext||(lastStay?.availability?{stay:{checkIn:lastStay.availability.checkIn,checkOut:lastStay.availability.checkOut,adults:lastStay.availability.adults},preferences:lastStay.availability.preferences}:undefined);
     const guestMessage = {id:Date.now(),role:'user',content:value,createdAt:new Date().toISOString()};
     setMessages((previous) => [...previous, guestMessage]);
     try {
       requestRef.current = new AbortController();
-      const response = await fetch('/api/chat', { method:'POST', headers:{'Content-Type':'application/json'}, signal:requestRef.current.signal, body:JSON.stringify({question:value,history,...(bookingContext?{bookingContext}:{}), ...(stay ? {stay} : {}),...(preferences?{preferences}:{})}) });
+      const response = await fetch('/api/chat', { method:'POST', headers:{'Content-Type':'application/json',Accept:'text/event-stream'}, signal:requestRef.current.signal, body:JSON.stringify({question:value,history,...(bookingContext?{bookingContext}:{}), ...(stay ? {stay} : {}),...(preferences?{preferences}:{})}) });
       let result;
-      try { result = await response.json(); } catch { throw new Error('We could not read the response. Please try again.'); }
-      if (!response.ok) throw new Error(result.error || 'The concierge is unavailable right now.');
+      if(!response.ok){const failure=await response.json().catch(()=>({}));throw new Error(failure.error||'The concierge is unavailable right now.');}
+      if(response.headers.get('content-type')?.includes('text/event-stream')){
+        await readEvents(response.body,event=>{
+          if(event.type==='text'){setStreamingAnswer(event.text);setStreamStatus('Writing your reply…');}
+          else if(event.type==='reset')setStreamingAnswer('');
+          else if(event.type==='status')setStreamStatus(event.text);
+          else if(event.type==='result')result=event.result;
+          else if(event.type==='error')throw new Error(event.message);
+        });
+        if(!result)throw new Error('The response was interrupted. Please try again.');
+      }else result=await response.json();
       setMessages((previous) => [...previous, {id:Date.now()+1,role:'assistant',content:result.answer,type:result.type,sources:result.sources,availability:result.availability,...(result.stay?{bookingContext:{stay:result.stay,preferences:result.preferences}}:{}),createdAt:new Date().toISOString()}]);
       if (result.type === 'availability-needed') editStay({...result.stay,preferences:result.preferences},false);
       if(result.availability)editStay(result.availability,false);
@@ -271,7 +292,7 @@ export default function GuestExperience({hotel}) {
       const copy = cause instanceof TypeError ? 'Please check your connection and try again.' : cause.message || 'Something went wrong. Please try again.';
       setError(copy);
       setMessages((previous) => [...previous, {id:Date.now()+1,role:'assistant',content:`I’m sorry, I couldn’t connect just now. ${copy}`,type:'error',retryQuestion:value}]);
-    } finally { setLoading(false); requestRef.current = null; }
+    } finally { setLoading(false); setStreamingAnswer(''); requestRef.current = null; }
   };
 
   const submitStay = (event) => {
@@ -380,7 +401,7 @@ export default function GuestExperience({hotel}) {
               </div>
               <div className="welcome-visual"><img src="/terrace-suite.png" alt="Sunlit terrace suite overlooking the Amalfi Coast"/><div className="welcome-photo-label"><span>A PLACE TO SLOW DOWN</span><p>Consider every<br/><em>moment yours.</em></p></div><span className="welcome-seal" aria-hidden="true"><Waves size={29}/></span></div>
             </div>}
-            <AnimatePresence>{loading && <motion.div className="message-row assistant" initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0}}><div className="avatar"><img src="/concierge-mark.webp" alt="" width="24" height="26"/></div><div className="message-body"><div className="message-author">Simplotel concierge</div><div className="typing-indicator" role="status" aria-label="Simplotel is thinking"><span/><span/><span/></div></div></motion.div>}</AnimatePresence>
+            <AnimatePresence>{loading && (streamingAnswer ? <Message key="streaming" message={{id:"streaming",role:"assistant",content:streamingAnswer,type:"streaming"}} reduceMotion={true}/> : <motion.div className="message-row assistant" initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0}}><div className="avatar"><img src="/concierge-mark.webp" alt="" width="24" height="26"/></div><div className="message-body"><div className="message-author">Simplotel concierge</div><div className="typing-indicator" role="status" aria-label={streamStatus}><span/><span/><span/></div><span className="stream-status">{streamStatus}</span></div></motion.div>)}</AnimatePresence>
             <div ref={chatEnd}/>
           </div>
           <div className="chat-bottom"><div className="prompt-row"><span>TRY ASKING</span><button type="button" onClick={() => askSuggestion('Does the hotel have a swimming pool?')}>The pool <ArrowUpRight size={13}/></button><button type="button" onClick={() => askSuggestion('Is breakfast included?')}>Breakfast <ArrowUpRight size={13}/></button><button type="button" onClick={() => askSuggestion('Does the parking fee include electric vehicle charging?')}>EV & parking <ArrowUpRight size={13}/></button><button type="button" onClick={() => askSuggestion('Which room is suitable for three guests?')}>Family rooms <ArrowUpRight size={13}/></button></div>

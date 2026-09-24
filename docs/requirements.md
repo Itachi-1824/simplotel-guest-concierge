@@ -10,7 +10,7 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Clean conversational interface | Full-viewport concierge in `GuestExperience.jsx` |
 | Enter and submit questions | Landing question field, chat composer, quick prompts |
 | Distinct guest and assistant messages | Separate alignment, labels, colours, timestamps |
-| Loading state | Thinking indicator, disabled composer, stop control |
+| Loading state | Thinking/tool status, streamed answer, disabled composer, stop control |
 | API/AI failure state | Error message and retry; provider fallback |
 | Follow-up questions | Per-session messages sent as bounded history |
 | Dates and guest collection | Natural-language chat collection, automatic form filling, optional date inputs/guest stepper |
@@ -31,10 +31,10 @@ Mapped to the three-page â€œBuild a Full-Stack AI-Powered Hotel Guest Assistantâ
 | Appropriate AI use | MiniLM, FlashRank, Laya, optional compatible LLM |
 | Deterministic business logic outside LLM | Validation, capacity, occupancy and totals in code |
 | Reliable unknown-answer fallback | Evidence gate, explicit abstention |
-| Conversation context | `query-plan.mjs`: follow-up entities, topics, stay slots |
+| Conversation context | Agent receives up to 16 recent messages and saved stay/preferences; `query-plan.mjs` supplies local follow-up parsing |
 | Structured responses | Response types documented in `api.md` |
 | Validation, errors and logging | Body/history limits, HTTP errors, type and duration logs |
-| Meaningful automated tests | 112 Node tests, three Python signal tests, 15 general and 13 booking HTTP scenarios |
+| Meaningful automated tests | 133 Node tests, three Python signal tests, 15 general and 13 booking HTTP scenarios |
 
 ## Integration and evaluation
 

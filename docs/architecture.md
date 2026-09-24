@@ -3,29 +3,20 @@
 ```mermaid
 flowchart TD
   A[Astro page + React interface] -->|POST question, history, stay| B[Astro Node API]
-  B --> C{Availability request?}
-  B --> R[Optional LLM function call]
-  R --> S[Validate tool arguments]
-  S --> C
-  C -->|Yes| D[Validate dates and guests]
-  D --> E[Deterministic inventory and price tool]
-  C -->|No| F[Context and query planning]
-  F --> G[BM25 + feature hashing]
-  F --> H[Local MiniLM embeddings]
-  H --> I[FlashRank reranking]
-  F --> J[Laya intent and query decisions]
-  I --> K[Laya bounded relevance signals]
-  G --> L[Reciprocal rank fusion]
-  K --> L
-  J --> H
-  L --> M[Reviewed graph relationships + evidence gate]
-  M --> N[Grounded source sentences]
-  N --> O[Optional LLM sentence selection]
-  O --> P[Validate source IDs and sentence indexes]
-  E --> Q[Structured JSON response]
-  N --> Q
-  P --> Q
-  Q --> A
+  B --> C{LLM agent enabled?}
+  C -->|Yes| D[Model with recent conversation and saved stay]
+  D --> E[Validate native tool arguments]
+  E --> F[prepare_stay: code validates inventory and prices]
+  E --> G[search_hotel_information]
+  G --> H[Known fact IDs: direct lookup]
+  G --> I[Broader query: BM25 + MiniLM + FlashRank + Laya + graph]
+  F --> D
+  H --> D
+  I --> D
+  D --> J[Stream answer and canonical result]
+  C -->|No or provider unavailable| K[Local parsing, retrieval and source answers]
+  K --> J
+  J --> A
 ```
 
 ## Product and UX
@@ -42,9 +33,11 @@ The JSON knowledge base contains 42 facts and four room types. BM25 provides a f
 
 Laya is a local classifier, not a text generator. It classifies intent, chooses among supplied query candidates, and judges candidate relevance. Its influence is capped; it cannot invent facts, prices, inventory, or graph edges. `npm run graph:propose` produces offline graph suggestions in `.cache/graph-proposals.json` for human review. It never changes the active graph.
 
-Availability, date arithmetic, capacity limits, and prices are ordinary code. The optional LLM interprets conversational requests into typed tool arguments, and selects sentence indexes from retrieved sources. Invalid fields, source IDs, incomplete selections, and invented prose are rejected. Explicitly parsed guest counts take precedence over model proposals. Ambiguous instructions prompt clarification without replacing the active stay.
+Availability, date arithmetic, capacity limits, and prices are ordinary code. The optional LLM interprets conversational requests into typed tool arguments and writes answers using returned evidence. Invalid tool fields and unknown fact IDs are rejected. Source labels come from actual tool results. Explicitly parsed guest counts take precedence over model proposals. Ambiguous instructions prompt clarification without replacing the active stay. Generated prose is not checked claim by claim and can still be wrong.
 
-The parser requests exactly one OpenAI-compatible function call with parallel calls disabled. Allowed functions are `prepare_stay`, `search_hotel_information`, `ask_guest`, and `decline_request`. Code validates the tool name, argument keys, field types, and allowed values before dispatch. A stay tool invokes local validation and mock inventory; a search tool invokes RAG. The model has no payment, reservation, shell, or external browsing tool. No arbitrary function name can execute code.
+With `CONCIERGE_AGENT_ENABLED=1`, the agent exposes two tools: `prepare_stay` and `search_hotel_information`. It can inspect results and continue, with at most 25 total tool calls per answer. Independent searches run in parallel; state-changing stay checks run sequentially. Identical calls share their result within a turn. Code validates names, argument keys, field types, and allowed values before dispatch. Exact fact IDs bypass semantic retrieval; broader searches use the local pipeline. The model has no payment, reservation, shell, or external browsing tool. No arbitrary function name can execute code. With the agent disabled, the earlier single-call interpreter remains available.
+
+The agent receives up to 16 recent user/assistant messages and the saved stay/preferences. Browser history is capped at 14 KB, with 1,200 characters per message. Conversation memory is bounded; this is not unlimited recall. Provider streaming stays open across tool rounds; the browser persists only the final canonical result. Markdown permits text formatting and safe links, disables raw HTML and images, and makes tables scroll inside their messages.
 
 ## Failure handling
 
@@ -54,13 +47,15 @@ The parser requests exactly one OpenAI-compatible function call with parallel ca
 | Invalid dates/capacity | Explain the validation error |
 | Unknown or ambiguous question | Abstain or ask for clarification |
 | Local model unavailable | Eight-second timeout; baseline retrieval; 15-second circuit breaker |
-| Transient LLM failure | One retry, fresh seed, short randomized backoff; 12-second timeout per attempt live; each attempt uses the provider allowance |
+| Transient LLM failure | One retry with a fresh seed and short randomized backoff; optional fallback model; 12-second timeout per attempt in the tested configuration |
+| Invalid tool output / eligible compatibility error | Try the configured fallback before returning to local handling |
 | LLM unavailable/invalid after retry | Local handling and complete source facts; uncertain requests ask for clarification |
 | Provider content filter / role override | Polite refusal and hotel redirect; no retry; refused overrides omitted from later interpretation history |
 | Frontend request fails | Visible error, preserved messages, retry control |
+| Guest stops a streamed answer | Cancel the response and upstream completion; incomplete text is not saved as a successful answer |
 | Browser storage unavailable | Continue in memory; show saving unavailable |
 
-Grounding prevents invented wording, but retrieval can still select the wrong fact, omit a qualification, or miss a paraphrase. Laya confidence is not a calibrated probability. The evaluation includes negative and ambiguous cases; more models alone do not establish better quality.
+Grounding reduces unsupported answers but does not prove factuality or jailbreak immunity. Retrieval can select the wrong fact, omit a qualification, or miss a paraphrase; the LLM can misread evidence. Laya confidence is not a calibrated probability. Deterministic validation protects quotes and inventory independently of answer wording. The evaluation includes negative and ambiguous cases; more models alone do not establish better quality.
 
 ## Measurement and production work
 

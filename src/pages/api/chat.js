@@ -27,17 +27,46 @@ export async function POST({ request, clientAddress }) {
       try{body.bookingContext={stay:{...(checkIn?{checkIn}:{}),...(checkOut?{checkOut}:{}),...(adults?{adults}:{})},preferences:normalizePreferences(context.preferences)};}catch(error){return json({error:error.message},400);}
     }
     if (body.history !== undefined && (!Array.isArray(body.history) || body.history.length > 16 || body.history.some((turn) => !['user','assistant'].includes(turn?.role) || typeof turn.content !== 'string' || turn.content.length > 1200))) return json({ error:'Conversation context is invalid.' }, 400);
-    const result = await answerQuestion(body, {
+    const config = {
       apiKey: process.env.OPENAI_API_KEY || import.meta.env.OPENAI_API_KEY,
       baseUrl: process.env.OPENAI_BASE_URL || import.meta.env.OPENAI_BASE_URL,
       model: process.env.OPENAI_MODEL || import.meta.env.OPENAI_MODEL,
+      agentEnabled: (process.env.CONCIERGE_AGENT_ENABLED || import.meta.env.CONCIERGE_AGENT_ENABLED) === '1',
+      fallbackModel: process.env.OPENAI_FALLBACK_MODEL || import.meta.env.OPENAI_FALLBACK_MODEL,
       modelTimeoutMs: process.env.OPENAI_TIMEOUT_MS || import.meta.env.OPENAI_TIMEOUT_MS,
-      modelMaxTokens: process.env.OPENAI_MAX_TOKENS || import.meta.env.OPENAI_MAX_TOKENS,
       embeddingModel: process.env.OPENAI_EMBEDDING_MODEL || import.meta.env.OPENAI_EMBEDDING_MODEL,
       localAiUrl: process.env.LOCAL_AI_URL || import.meta.env.LOCAL_AI_URL,
       canCallModel: () => limits.reserveModelCall(),
       logger: console
-    });
+    };
+    if(request.headers.get('accept')?.includes('text/event-stream')){
+      const abort=new AbortController();
+      const encoder=new TextEncoder();
+      let closed=false;
+      let heartbeat;
+      const stream=new ReadableStream({
+        start(controller){
+          const emit=event=>{if(!closed)controller.enqueue(encoder.encode('data: '+JSON.stringify(event)+'\n\n'));};
+          emit({type:'status',text:'Thinking about your request…'});
+          heartbeat=setInterval(()=>emit({type:'heartbeat'}),10000);
+          answerQuestion(body,{...config,signal:abort.signal,onEvent:emit}).then(result=>{
+            console.info('chat_request',{type:result.type,durationMs:Date.now()-started,stream:true});
+            emit({type:'result',result:{...result,demo:true}});
+          }).catch(error=>{
+            if(!abort.signal.aborted){
+              console.error('chat_request_failed',{durationMs:Date.now()-started,message:error.message});
+              emit({type:'error',message:'The connection was interrupted. Please try again.'});
+            }
+          }).finally(()=>{
+            clearInterval(heartbeat);
+            if(!closed){closed=true;controller.close();}
+          });
+        },
+        cancel(){closed=true;clearInterval(heartbeat);abort.abort();}
+      });
+      return new Response(stream,{headers:{'Content-Type':'text/event-stream; charset=utf-8','Cache-Control':'no-cache, no-transform','X-Accel-Buffering':'no'}});
+    }
+    const result=await answerQuestion(body,config);
     console.info('chat_request', { type:result.type, durationMs:Date.now() - started });
     return json({...result, demo:true}, 200);
   } catch (error) {
